@@ -12,7 +12,7 @@ const Navbar = () => {
           <input
             type="text"
             id="searchBar"
-            className=" px-5 py-5 h-full w-full bg-secondery rounded-full active:border-none outline-none text-orange"
+            className=" px-5 py-5 h-full w-full bg-hr rounded-full active:border-none outline-none text-orange"
             placeholder="Search...."
           />
           <label htmlFor="searchBar" className="cursor-pointer">
@@ -22,7 +22,7 @@ const Navbar = () => {
       </div>
       <div className="w-1/3 py-5">
         <div className="w-3/4 h-12 relative rounded-full flex justify-between">
-          <div className="flex justify-between text-sm items-center bg-secondery py-3 h-full rounded-full px-4 text-orange">
+          <div className="flex justify-between text-sm items-center bg-hr py-3 h-full rounded-full px-4 text-orange">
             <MdCloudUpload className="text-xl text-orange mr-2" />
             Upload Video
           </div>

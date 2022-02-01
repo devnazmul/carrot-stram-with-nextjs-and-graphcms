@@ -6,13 +6,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#15141B',
-        secondery: '#2F3B4A',
+        primary: '#15141b',
+        secondery: '#181921',
         icon:'#504F56',
+        hr:'#343437',
         white: '#ffffff',
-        orange: '#f96c0f'
+        orange: '#f96c0f',
+        hovColor:'#201E2B'
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
+  variants: {
+    scrollbar: ['rounded']
+}
 }
