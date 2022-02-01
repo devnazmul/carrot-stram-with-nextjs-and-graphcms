@@ -7,7 +7,6 @@ export default function Aside() {
       <div className="flex justify-between items-center mb-5">
         <Image src="/src/img/carrot.png" width="450px" height="90px" />
       </div>
-
       <div>
         <div className="border-t border-icon py-2">Categories</div>
         <div className="border-t border-icon py-2">Categories</div>

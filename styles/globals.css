@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navBarBg {
+  background: linear-gradient(
+    180deg,
+    #15141b,
+    #15141b,
+    #15141b,
+    #15141b,
+    #15141bf8,
+    #15141bf5,
+    #15141bcb,
+    transparent
+  );
+}

@@ -1,12 +1,12 @@
-import Image from "next/image";
 import React from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { MdCloudUpload } from "react-icons/md";
+import Avater from "../../Avater/Avater";
 
 const Navbar = () => {
   return (
-    <nav className="w-full h-16 bg-primary z-10 flex justify-between fixed pl-72 ">
+    <nav className="w-full h-28 navBarBg z-10 flex pb-5 justify-between fixed pl-72 ">
       <div className="w-1/2 px-10 py-5">
         <div className="w-3/4 h-12 bg-secondery overflow-hidden relative rounded-full">
           <input
@@ -31,14 +31,7 @@ const Navbar = () => {
               <span className="absolute w-3 h-3 -top-0.5 -right-0.5 rounded-full border border-primary bg-orange"></span>
               <IoNotificationsSharp className="text-xl" />
             </div>
-            <div className="cursor-pointer h-12 w-12 border-dotted rounded-full mx-4 overflow-hidden border-2 p-1 border-orange">
-              <Image
-                src="/src/img/avater.png"
-                height="40px"
-                width="40px"
-                className="rounded-full"
-              />
-            </div>
+            <Avater />
           </div>
         </div>
       </div>
