@@ -19,7 +19,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/Main/Main.tsx"
+    "components/Main/Main.tsx",
+    "services/index.js"
   ],
   "exclude": ["node_modules"]
 }

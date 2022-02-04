@@ -1,14 +1,21 @@
-import React from "react";
+import { GetServerSideProps } from "next";
+import React, { useEffect, useState } from "react";
 import { getVideos } from "../../services/index";
 import Aside from "../Aside/Aside";
 import Header from "../Header/Header";
 import VideoCard from "./VideoCard/VideoCard";
 
-interface Props {
-  videos: Array<object>;
-}
+export default function Main() {
+  const [videos, setVideos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-export default function Main({ videos }: Props) {
+  useEffect(() => {
+    getVideos().then((data) => {
+      setVideos(data);
+      setIsLoading(false);
+    });
+  });
+
   return (
     <main className="bg-primary">
       <Header />
@@ -21,40 +28,22 @@ export default function Main({ videos }: Props) {
             </div> */}
 
             <div className="flex flex-wrap -m-3">
-              {/* {videos.map((video: any) => { */}
-              <VideoCard
-                videoUrl="/"
-                thumbnailUrl="/src/img/thum1.jpg"
-                title="Trass gaiming with retrex"
-                channelName="Retrex Gaming"
-                timeStamp="28 min ago"
-                views={100}
-              />
-              <VideoCard
-                videoUrl="/"
-                thumbnailUrl="/src/img/thum1.jpg"
-                title="Trass gaiming with retrex"
-                channelName="Retrex Gaming"
-                timeStamp="28 min ago"
-                views={100}
-              />
-              <VideoCard
-                videoUrl="/"
-                thumbnailUrl="/src/img/thum1.jpg"
-                title="Trass gaiming with retrex"
-                channelName="Retrex Gaming"
-                timeStamp="28 min ago"
-                views={100}
-              />
-              <VideoCard
-                videoUrl="/"
-                thumbnailUrl="/src/img/thum1.jpg"
-                title="Trass gaiming with retrex"
-                channelName="Retrex Gaming"
-                timeStamp="28 min ago"
-                views={100}
-              />
-              {/* // })} */}
+              {isLoading ? (
+                <div className="w-96 flex items-center justify-center h-screen text-2xl">
+                  Loading...
+                </div>
+              ) : (
+                videos.map(() => (
+                  <VideoCard
+                    videoUrl="/"
+                    thumbnailUrl="/src/img/thum1.jpg"
+                    title="Trass gaiming with retrex"
+                    channelName="Retrex Gaming"
+                    timeStamp="28 min ago"
+                    views={100}
+                  />
+                ))
+              )}
               {/* <Finised></Finised> */}
             </div>
           </div>
@@ -64,13 +53,7 @@ export default function Main({ videos }: Props) {
   );
 }
 
-export async function getStaticProps() {
-  getVideos().then((res) => {
-    console.log(res);
-    return {
-      props: {
-        videos: res,
-      },
-    };
-  });
-}
+export const getServerSideProps: GetServerSideProps = async () => {
+  const videos = (await getVideos()) || [];
+  return { props: { videos } };
+};
