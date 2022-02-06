@@ -12,7 +12,43 @@ interface Props {
   channelName: string;
   timeStamp: string;
   views: number;
+  channelAvater: string;
 }
+
+// function get_time_diff(datetime: string) {
+//   var datetime =
+//     typeof datetime !== "undefined" ? datetime : "2014-01-01 01:02:03.123456";
+
+//   var datetime = new Date(datetime).getTime();
+//   var now = new Date().getTime();
+
+//   if (isNaN(datetime)) {
+//     return "";
+//   }
+
+//   console.log(datetime + " " + now);
+
+//   if (datetime < now) {
+//     var milisec_diff = now - datetime;
+//   } else {
+//     var milisec_diff = datetime - now;
+//   }
+
+//   var days = Math.floor(milisec_diff / 1000 / 60 / (60 * 24));
+
+//   var date_diff = new Date(milisec_diff);
+
+//   return (
+//     days +
+//     " Days " +
+//     date_diff.getHours() +
+//     " Hours " +
+//     date_diff.getMinutes() +
+//     " Minutes " +
+//     date_diff.getSeconds() +
+//     " Seconds"
+//   );
+// }
 
 function VideoCard({
   videoUrl,
@@ -21,11 +57,12 @@ function VideoCard({
   channelName,
   timeStamp,
   views,
+  channelAvater,
 }: Props) {
   return (
     <Link href={videoUrl}>
       <div className="cursor-pointer h-full px-5 lg:w-1/3 md:w-1/2 w-full">
-        <a className="block relative h-48 rounded overflow-hidden mb-1">
+        <a className="block relative w-full rounded overflow-hidden mb-1">
           {thumbnailUrl && (
             <Image
               alt="ecommerce"
@@ -36,32 +73,40 @@ function VideoCard({
             />
           )}
         </a>
-        <div className="flex items-center justify-between mb-10">
+        <div className="flex items-center justify-between mb-10 ">
           <div className="flex">
-            <div>
-              <Avater name="Retro gaming" src="/src/img/avater.png" />
-            </div>
             <div className="">
-              <div>
-                {title && (
-                  <p className="text-gray-100 title-font text-lg font-medium truncate overflow-hidden">
-                    {title}
-                  </p>
-                )}
-                {channelName && (
-                  <h3 className="text-gray-700 text-xs tracking-widest title-font mb-1">
-                    {channelName}
-                  </h3>
-                )}
-              </div>
-              <div className="text-xs tracking-widest flex items-center">
-                {views && <span>{views} views</span>}
-                <BsDot className="text-orange text-3xl" />
-                {timeStamp && <span>{timeStamp}</span>}
+              <div className="flex">
+                <div>
+                  <Avater name={channelName} src={channelAvater} />
+                </div>
+                <div className="">
+                  {title && (
+                    <p className="text-gray-100 h-10 title-font text-sm font-medium overflow-hidden">
+                      {title.length > 65
+                        ? title.substring(0, 65) + ` ....`
+                        : title}
+                    </p>
+                  )}
+                  {channelName && (
+                    <h3 className="text-gray-700 text-xs tracking-widest title-font mb-1">
+                      {channelName}
+                    </h3>
+                  )}
+                  <div className="text-xs tracking-widest flex items-center">
+                    {views && views === 0 ? (
+                      <span>0 views</span>
+                    ) : (
+                      <span>{views} views</span>
+                    )}
+                    <BsDot className="text-orange text-3xl" />
+                    {timeStamp && <span>{timeStamp}</span>}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="mr-2 cursor-pointer">
+          <div className="mr-0 cursor-pointer">
             <BiDotsVerticalRounded className="text-2xl" />
           </div>
         </div>

@@ -1,9 +1,36 @@
+import moment from "moment";
 import { GetServerSideProps } from "next";
 import React, { useEffect, useState } from "react";
 import { getVideos } from "../../services/index";
 import Aside from "../Aside/Aside";
 import Header from "../Header/Header";
 import VideoCard from "./VideoCard/VideoCard";
+
+interface Video {
+  publishedAt: string;
+  channel: Channel;
+  description: string;
+  id: string;
+  title: string;
+  views: Array<Int16Array>;
+  videoContent: object;
+  thumbnail: Thumbnail;
+}
+interface Thumbnail {
+  url: string;
+}
+interface Channel {
+  url: string;
+  channelLogo: ChannelLogo;
+  channelName: string;
+}
+interface ChannelLogo {
+  url: string;
+}
+
+interface Avatar {
+  url: string;
+}
 
 export default function Main() {
   const [videos, setVideos] = useState([]);
@@ -12,9 +39,11 @@ export default function Main() {
   useEffect(() => {
     getVideos().then((data) => {
       setVideos(data);
+      console.log(data);
+
       setIsLoading(false);
     });
-  });
+  }, []);
 
   return (
     <main className="bg-primary">
@@ -33,15 +62,19 @@ export default function Main() {
                   Loading...
                 </div>
               ) : (
-                videos.map(() => (
-                  <VideoCard
-                    videoUrl="/"
-                    thumbnailUrl="/src/img/thum1.jpg"
-                    title="Trass gaiming with retrex"
-                    channelName="Retrex Gaming"
-                    timeStamp="28 min ago"
-                    views={100}
-                  />
+                videos.map((video: Video) => (
+                  <>
+                    <VideoCard
+                      key={video.id}
+                      videoUrl={video.id}
+                      thumbnailUrl={video.thumbnail.url}
+                      title={video.title}
+                      channelName={video.channel.channelName}
+                      channelAvater={video.channel.channelLogo.url}
+                      timeStamp={moment(video.publishedAt).fromNow()}
+                      views={video.views.length}
+                    />
+                  </>
                 ))
               )}
               {/* <Finised></Finised> */}

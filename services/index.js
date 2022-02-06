@@ -4,32 +4,30 @@ const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 export const getVideos = async () => {
   const query = gql`
-    query MyQuery {
-      videosConnection {
-        edges {
-          node {
-            createdAt
-            id
-            title
-            url
-            view {
-              id
-            }
-            author {
-              id
-              usename
-              avater {
-                url
-              }
-            }
-          }
+  query getVideos {
+    videos {
+      id
+      slug
+      title
+      publishedAt
+      thumbnail {
+        url
+      }
+      views {
+        id
+      }
+      channel {
+        channelName
+        channelLogo {
+          url
         }
       }
     }
+  }
   `;
 
   const result = await request(graphqlAPI, query);
-  const data = result.videosConnection.edges;
+  const data = result.videos;
   return data;
 };
 

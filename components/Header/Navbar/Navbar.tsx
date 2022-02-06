@@ -5,7 +5,7 @@ import { MdCloudUpload } from "react-icons/md";
 import Avater from "../../Avater/Avater";
 const Navbar = () => {
   return (
-    <nav className="w-full h-28 navBarBg z-10 flex pb-5 justify-between fixed  pl-24 lg:pl-72 ">
+    <nav className="w-full h-28 navBarBg z-10 flex pb-5 justify-between fixed pr-5 lg:pr-0 pl-20 lg:pl-72 ">
       <div className="lg:w-1/2 w-full pl-10 lg:pl-0 lg:px-10 py-5">
         <div className="lg:w-3/4 w-4/5 m h-12 bg-secondery overflow-hidden relative rounded-full">
           <input
