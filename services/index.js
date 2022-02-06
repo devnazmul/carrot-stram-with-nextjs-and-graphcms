@@ -31,3 +31,21 @@ export const getVideos = async () => {
   return data;
 };
 
+export const getChannels = async () => {
+  const query = gql`
+  query getChannels {
+    channels {
+      id
+      channelName
+      channelLogo {
+        url
+      }
+      slug
+    }
+  }
+  `;
+
+  const result = await request(graphqlAPI, query);
+  const data = result.channels;
+  return data;
+}

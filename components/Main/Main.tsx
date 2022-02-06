@@ -39,8 +39,6 @@ export default function Main() {
   useEffect(() => {
     getVideos().then((data) => {
       setVideos(data);
-      console.log(data);
-
       setIsLoading(false);
     });
   }, []);
