@@ -1,8 +1,14 @@
-import { gql, request } from "graphql-request";
+import { gql, GraphQLClient } from "graphql-request";
 
-const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
+const graphCMSEndpoint = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
-export const getVideos = async () => {
+const gqlClient = new GraphQLClient(graphCMSEndpoint,{
+  headers:{
+    "Authentication": process.env.NEXT_PUBLIC_GRAPHCMS_TOKEN
+  }
+});
+
+export const getVideosForHomePage = async () => {
   const query = gql`
   query getVideos {
     videos {
@@ -26,12 +32,12 @@ export const getVideos = async () => {
   }
   `;
 
-  const result = await request(graphqlAPI, query);
-  const data = result.videos;
-  return data;
+  const result = await gqlClient.request(query);
+  const videos = result.videos;
+  return videos;
 };
 
-export const getChannels = async () => {
+export const getSubscribedChannels = async () => {
   const query = gql`
   query getChannels {
     channels {
@@ -45,7 +51,8 @@ export const getChannels = async () => {
   }
   `;
 
-  const result = await request(graphqlAPI, query);
-  const data = result.channels;
-  return data;
+  const result = await gqlClient.request(query);
+  const channels = result.channels;
+  return channels;
 }
+

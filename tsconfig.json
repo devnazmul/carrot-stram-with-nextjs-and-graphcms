@@ -20,7 +20,8 @@
     "**/*.ts",
     "**/*.tsx",
     "components/Main/Main.tsx",
-    "services/index.js"
+    "services/index.js",
+    "components/Layout/Layout.js"
   ],
   "exclude": ["node_modules"]
 }

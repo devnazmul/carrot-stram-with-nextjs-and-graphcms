@@ -1,12 +1,16 @@
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { AiTwotoneLike } from "react-icons/ai";
 import { BiHistory } from "react-icons/bi";
 import { HiHome } from "react-icons/hi";
-import { MdExplore, MdOutlineSlowMotionVideo } from "react-icons/md";
+import {
+  MdExplore,
+  MdOutlineSlowMotionVideo,
+  MdSubscriptions,
+} from "react-icons/md";
 import { RiPlayList2Fill } from "react-icons/ri";
-import { getChannels } from "../../services/index";
-import Avater from "../Avater/Avater";
+import { getSubscribedChannels } from "../../services/index";
 import Logo from "./Logo/Logo";
 import NavLink from "./NavLink/NavLink";
 
@@ -24,7 +28,7 @@ export default function Aside() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getChannels().then((data) => {
+    getSubscribedChannels().then((data) => {
       setChannels(data);
       setIsLoading(false);
     });
@@ -79,10 +83,13 @@ export default function Aside() {
           <hr className="border-hr my-3 mx-2 lg:mx-7 horizontL" />
         </div>
         <div className="">
-          {/* <div className="py-4 text-xl text-hr px-0 lg:px-10">
-            <div className="text-sm lg:text-xl">Subscriptions</div>
-          </div> */}
-          <div>
+          <div className="pb-5 pt-3 text-xl font-bold text-hr flex justify-center items-center lg:px-10">
+            <MdSubscriptions className="text-orange" />
+            <div className="ml-3 text-sm lg:text-xl text-white">
+              Subscriptions
+            </div>
+          </div>
+          <div className=" text-icon font-medium">
             {isLoading ? (
               <div className="flex items-center justify-center py-2">
                 Loading...
@@ -91,11 +98,13 @@ export default function Aside() {
               channels.map((channel: Channel) => (
                 <Link key={channel.id} href="/">
                   <div className="flex cursor-pointer items-center justify-center lg:justify-start mb-1 hover:bg-hovColor py-2 px-1 lg:px-10">
-                    <Avater
-                      name={channel.channelName}
+                    <Image
+                      height="30px"
+                      width="30px"
+                      alt={channel.channelName}
                       src={channel.channelLogo.url}
                     />
-                    <span className="hidden lg:block">
+                    <span className="hidden lg:block ml-3">
                       {" "}
                       {channel.channelName}
                     </span>
