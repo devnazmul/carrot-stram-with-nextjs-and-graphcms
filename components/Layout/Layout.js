@@ -4,9 +4,9 @@ import Header from "../Header/Header";
 
 export default function Layout({ children }) {
   return (
-    <div className="bg-primary">
+    <div className="bg-primary  ">
       <Header />
-      <div className="flex">
+      <div className="flex w-full">
         <Aside />
         {children}
       </div>

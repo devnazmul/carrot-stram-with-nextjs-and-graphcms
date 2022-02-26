@@ -11,6 +11,7 @@ import {
 } from "react-icons/md";
 import { RiPlayList2Fill } from "react-icons/ri";
 import { getSubscribedChannels } from "../../services/index";
+import LoadingComponent from "../Loading/LoadingComponent";
 import Logo from "./Logo/Logo";
 import NavLink from "./NavLink/NavLink";
 
@@ -28,7 +29,11 @@ export default function Aside() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getSubscribedChannels().then((data) => {
+    const getSubscriptions = async () => {
+      const videos = (await getSubscribedChannels()) || [];
+      return videos;
+    };
+    getSubscriptions().then((data) => {
       setChannels(data);
       setIsLoading(false);
     });
@@ -84,27 +89,27 @@ export default function Aside() {
         </div>
         <div className="">
           <div className="pb-5 pt-3 text-xl font-bold text-hr flex justify-center items-center lg:px-10">
-            <MdSubscriptions className="text-orange" />
-            <div className="ml-3 text-sm lg:text-xl text-white">
+            <MdSubscriptions className="text-orange hidden lg:block" />
+            <div className="lg:ml-3 font-semibold text-xs lg:text-xl text-white">
               Subscriptions
             </div>
           </div>
           <div className=" text-icon font-medium">
             {isLoading ? (
-              <div className="flex items-center justify-center py-2">
-                Loading...
+              <div className="flex items-center justify-center lg:justify-start mb-1 py-2 px-1 lg:px-10">
+                <LoadingComponent />
               </div>
             ) : (
               channels.map((channel: Channel) => (
                 <Link key={channel.id} href="/">
-                  <div className="flex cursor-pointer items-center justify-center lg:justify-start mb-1 hover:bg-hovColor py-2 px-1 lg:px-10">
+                  <div className="flex cursor-pointer items-center justify-center lg:justify-start mb-1 hover:bg-hovColor py-2 px-1 xl:px-10">
                     <Image
                       height="30px"
                       width="30px"
                       alt={channel.channelName}
                       src={channel.channelLogo.url}
                     />
-                    <span className="hidden lg:block ml-3">
+                    <span className="hidden xl:block ml-3 text-sm">
                       {" "}
                       {channel.channelName}
                     </span>

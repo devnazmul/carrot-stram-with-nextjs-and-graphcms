@@ -13,6 +13,7 @@ module.exports = {
         white: '#ffffff',
         orange: '#f96c0f',
         hovColor:'#201E2B',
+        loadingColor:'#1F222F',
         shadowColor:'#ff660031'
       },
     },
