@@ -2,7 +2,6 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import Avater from "../../components/Avater/Avater";
 import Layout from "../../components/Layout/Layout";
-import SideBarVideo from "../../components/SideBarVideo/SideBarVideo";
 import SingleVideo from "../../components/SingleVideo/SingleVideo";
 import { getSingleVideo } from "../../services";
 
@@ -44,11 +43,11 @@ export default function Video({ video }: Props) {
       {
         <div className="text-gray-600 body-font h-screen w-full bg-transparent pl-24 md:pl-48 lg:pl-72 sm:pl-32 pt-7 mt-10">
           <div className="w-full h-full flex mt-10">
-            <div className="w-full xl:w-8/12 px-5">
+            <div className="w-full xl:w-full px-5">
               <SingleVideo video={video} />
             </div>
 
-            <div className="w-3/12 overflow-y-auto fixed top-16 pt-10 pr-5 right-0 h-screen  hidden xl:block">
+            <div className="w-3/12 overflow-y-auto fixed top-16 pt-10 pr-5 right-0 h-screen  hidden ">
               <div className="bg-secondery sticky -top-10 z-10 shadow-xl pt-10 w-full py-5 rounded-xl px-5">
                 <div className="flex justify-center items-center cursor-pointer">
                   <Avater
@@ -64,7 +63,7 @@ export default function Video({ video }: Props) {
                 </span>
               </div>
 
-              <SideBarVideo video={video} />
+              {/* <SideBarVideo video={video} /> */}
             </div>
           </div>
         </div>

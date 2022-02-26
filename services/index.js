@@ -118,3 +118,10 @@ export const getSingleVideo = async (slug) => {
   const videos = result.videos;
   return videos;
 }
+
+// export const getVideoFromChannel = async () => {
+//   const query = gql`yourQuery`;
+//   const result = await gqlClient.request(query);
+//   const videos = result.videos;
+//   return videos;
+// }
