@@ -6,7 +6,7 @@ import { BsDot } from "react-icons/bs";
 import Avater from "../../Avater/Avater";
 
 interface Props {
-  videoUrl: string;
+  videoSlug: string;
   thumbnailUrl: string;
   title: string;
   channelName: string;
@@ -51,7 +51,7 @@ interface Props {
 // }
 
 function VideoCard({
-  videoUrl,
+  videoSlug,
   thumbnailUrl,
   title,
   channelName,
@@ -60,7 +60,7 @@ function VideoCard({
   channelAvater,
 }: Props) {
   return (
-    <Link href={videoUrl}>
+    <Link href={`video/${videoSlug}`}>
       <div className="cursor-pointer h-full px-5 lg:w-1/3 md:w-1/2 w-full">
         <a className="block relative w-full rounded overflow-hidden mb-1">
           {thumbnailUrl && (

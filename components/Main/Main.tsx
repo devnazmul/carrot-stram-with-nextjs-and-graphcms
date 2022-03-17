@@ -11,6 +11,7 @@ interface Video {
   channel: Channel;
   description: string;
   id: string;
+  slug: string;
   title: string;
   views: Array<Int16Array>;
   videoContent: object;
@@ -34,7 +35,7 @@ interface Avatar {
 
 export default function Main({ videos }: Props) {
   return (
-    <div className="bg-orange text-gray-600 body-font bg-transparent pl-24 lg:pl-72 mt-10">
+    <div className="text-gray-600 body-font bg-transparent pl-24 lg:pl-72 mt-10">
       <div className="container px-5 py-24 mx-auto">
         {/* <div className="mb-10">
               <MiniVideo />
@@ -44,7 +45,7 @@ export default function Main({ videos }: Props) {
           {videos.map((video: Video) => (
             <React.Fragment key={video.id}>
               <VideoCard
-                videoUrl={video.id}
+                videoSlug={video.slug}
                 thumbnailUrl={video.thumbnail.url}
                 title={video.title}
                 channelName={video.channel.channelName}
