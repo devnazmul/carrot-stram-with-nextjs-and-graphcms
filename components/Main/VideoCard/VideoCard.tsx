@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
 import Avater from "../../Avater/Avater";
