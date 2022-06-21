@@ -1,11 +1,12 @@
-import React from "react";
+import Image from "next/image";
 import Layout from "../../components/Layout/Layout";
 
 export default function playlist() {
   return (
     <Layout>
-      <div className="text-gray-600 body-font bg-transparent pl-24 lg:pl-72 pt-10 mt-20">
-        <div className="text-white text-6xl">playlist</div>
+      <div className="pl-24 lg:pl-72 h-screen w-full flex text-5xl text-gray-600 font-bold flex-col  justify-center items-center">
+        <Image src={"/src/img/not-found.png"} width="300px" height="300px" />
+        No data found!
       </div>
     </Layout>
   );

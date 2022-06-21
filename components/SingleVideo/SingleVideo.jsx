@@ -1,5 +1,4 @@
 import moment from "moment";
-import React from "react";
 import { BiCommentDetail, BiDislike, BiLike, BiShareAlt } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
 import { MdOutlineDescription } from "react-icons/md";
