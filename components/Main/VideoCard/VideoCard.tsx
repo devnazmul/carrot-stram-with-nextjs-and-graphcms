@@ -61,7 +61,7 @@ function VideoCard({
   return (
     <Link href={`video/${videoSlug}`}>
       <div className="cursor-pointer h-full px-5 lg:w-1/3 md:w-1/2 w-full">
-        <a className="block relative w-full rounded overflow-hidden mb-1">
+        <a className="block relative w-full overflow-hidden mb-1  rounded shadow-lg">
           {thumbnailUrl && (
             <Image
               alt="ecommerce"

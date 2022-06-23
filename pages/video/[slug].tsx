@@ -1,5 +1,4 @@
 import { GetServerSideProps } from "next";
-import React from "react";
 import Avater from "../../components/Avater/Avater";
 import Layout from "../../components/Layout/Layout";
 import SingleVideo from "../../components/SingleVideo/SingleVideo";
@@ -15,7 +14,7 @@ interface Props {
   video: Array<Video>;
 }
 interface Video {
-  description: string;
+  description: Object;
   channel: Channel;
   videoLikes: Array<VideoLikes>;
 }

@@ -17,3 +17,10 @@ body {
     transparent
   );
 }
+.htmlContent p {
+  display: block;
+  width: 100%;
+}
+.htmlContent a {
+  color: orange;
+}

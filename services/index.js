@@ -110,7 +110,12 @@ export const getSingleVideo = async (slug) => {
       videoLikes {
         id
       }
-      description
+      description{
+        markdown
+        raw
+        text
+        html
+      }
     }
   }
 `;
