@@ -1,4 +1,4 @@
-import React from "react";
+import Link from "next/link";
 import { BiSearchAlt } from "react-icons/bi";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { MdCloudUpload } from "react-icons/md";
@@ -19,13 +19,14 @@ const Navbar = () => {
           </label>
         </div>
       </div>
-
       <div className="lg:w-1/3 w-1/5 py-5">
         <div className="w-3/4 h-12 relative rounded-full flex justify-between">
-          <div className="cursor-pointer hidden lg:flex  justify-between text-sm items-center bg-hr py-3 h-full rounded-full px-4 text-orange">
-            <MdCloudUpload className="text-xl text-orange mr-2" />
-            Upload Video
-          </div>
+          <Link href={"/uploadVideo"}>
+            <div className="cursor-pointer hidden lg:flex  justify-between text-sm items-center bg-hr py-3 h-full rounded-full px-4 text-orange">
+              <MdCloudUpload className="text-xl text-orange mr-2" />
+              Upload Video
+            </div>
+          </Link>
           <div className="flex justify-between items-center">
             <div className="cursor-pointer relative mr-2">
               <span className="absolute w-3 h-3 -top-0.5 -right-0.5 rounded-full border border-primary bg-orange"></span>
