@@ -7,4 +7,5 @@ module.exports = {
       'i.ibb.co'
     ],
   },
+  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
 }
