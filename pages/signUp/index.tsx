@@ -7,6 +7,7 @@ import Layout from "../../components/Layout/Layout";
 import { submitAuthor } from "../../middleware/submitAuthor";
 
 export default function index() {
+  const [imageUrl, setImageUrl] = useState<string | null>();
   const { register, handleSubmit } = useForm();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,12 +25,10 @@ export default function index() {
     submitAuthor(data).then((res: any) => {
       setLoading(false);
       setSubmitted(true);
-      console.log(res);
-
       localStorage.setItem("UserData", JSON.stringify(res));
       setTimeout(() => {
         router.push("/");
-      }, 5000);
+      }, 2000);
     });
   };
 
@@ -47,18 +46,26 @@ export default function index() {
             <label
               htmlFor="profilePic"
               title="Upload Profile Picture"
-              className="bg-hr cursor-pointer w-44 text-6xl text-orange border-4 border-orange h-44 rounded-full mb-5 justify-center items-center flex"
+              className="bg-hr cursor-pointer overflow-hidden w-44 text-6xl text-orange border-4 border-orange h-44 rounded-full mb-5 justify-center items-center flex"
             >
               <Image
-                src={"https://i.ibb.co/qWvBRhc/001-photo.png"}
-                height={50}
-                width={50}
+                src={`${
+                  imageUrl ? imageUrl : "https://i.ibb.co/qWvBRhc/001-photo.png"
+                }`}
+                height={imageUrl ? 176 : 50}
+                width={imageUrl ? 176 : 50}
+                objectFit={imageUrl ? "cover" : "cover"}
               />
             </label>
           </span>
           <input
             type="file"
-            {...register("fileName", { required: true })}
+            {...register("fileName", {
+              onChange: (e) => {
+                setImageUrl(URL.createObjectURL(e.target.files[0]));
+              },
+              required: true,
+            })}
             className="hidden"
             id="profilePic"
           />

@@ -8,7 +8,7 @@ import Avater from "../../Avater/Avater";
 const Navbar = () => {
   const [user, setUser] = useState();
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("UserData")));
+    setUser(JSON.parse(localStorage.getItem("UserData") || "false"));
   }, []);
   return (
     <nav className="w-full h-28 navBarBg z-10 flex pb-5 justify-between fixed pr-5 lg:pr-0 pl-20 sm:pl-32 md:pl-48  lg:pl-72 ml-7">
@@ -28,7 +28,7 @@ const Navbar = () => {
       <div className="lg:w-1/3 w-1/5 py-5 mr-16">
         <div className="w-full h-12 relative rounded-full flex justify-end">
           <div className="flex justify-center items-center">
-            {user === null ? (
+            {!user ? (
               <>
                 <Link href={"/logIn"}>
                   <div className="w-28 cursor-pointer hidden mr-5 lg:flex  justify-center text-sm items-center bg-hr py-3 h-full rounded-full px-5 text-orange font-bold">
@@ -53,7 +53,7 @@ const Navbar = () => {
                   <span className="absolute w-3 h-3 -top-0.5 -right-0.5 rounded-full border border-hr bg-orange"></span>
                   <IoNotificationsSharp className="text-xl text-hr" />
                 </div>
-                <Avater user={user} />
+                {user && <Avater user={user} />}
               </>
             )}
           </div>
