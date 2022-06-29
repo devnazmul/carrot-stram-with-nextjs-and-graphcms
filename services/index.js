@@ -56,7 +56,6 @@ export const getSubscribedChannels = async () => {
   return channels;
 }
 
-
 export const getPlaylists = async () => {
   const query = gql`
   query getChannels {
@@ -130,3 +129,75 @@ export const getSingleVideo = async (slug) => {
 //   const videos = result.videos;
 //   return videos;
 // }
+
+export const createUser = async (name) => {
+  const query = gql`
+  mutation MyMutation {
+    createAsset(data: {handle: ${"test"}, fileName: ${name}}){
+      width
+      url
+      updatedAt
+      stage
+      size
+      publishedAt
+      mimeType
+      locale
+      id
+      height
+      handle
+      fileName
+      createdAt
+    }
+  }`;
+
+  const result = await gqlClient.request(query);
+  const author = result;
+  return author;
+};
+
+
+
+// MUTATIONS ============================================================
+export const updateAssetStage = async (id) => {
+  const query = gql`
+  mutation MyMutation {publishAsset(where: { id: "${id}" }, to: PUBLISHED){
+    id,
+    url
+  }}
+`;
+  const result = await gqlClient.request(query);
+  const assetId = result.publishAsset.id;
+  return assetId;
+}
+
+export const creareAuthor = async (authorObject) => {
+  const query = gql`
+  mutation createAuthMutation($id: ID!,$fullName:String!,$username:String!,$email:String!,$about:String!, $password:String!,) {
+         createAuthor(data: {fullName: $fullName, username: $username, email: $email, about: $about password: $password, avatar: {connect: {id: $id}}}){
+             id
+          }
+     }
+`;
+  const result = await gqlClient.request(query, authorObject)
+  const authorId = result.createAuthor.id;
+  return authorId;
+}
+
+export const updateAuthorStage = async (id) => {
+  const query = gql`
+  mutation MyMutation {
+    publishAuthor(where: { id: "${id}" }, to: PUBLISHED){
+          email
+          avatar {
+            url
+          }
+          fullName
+          username
+          about
+  }
+}
+`;
+  const result = await gqlClient.request(query);
+  const author = result.publishAuthor;
+  return author;
+}
