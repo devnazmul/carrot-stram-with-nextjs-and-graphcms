@@ -1,6 +1,7 @@
 import { creareAuthor, updateAssetStage, updateAuthorStage } from "../services";
 
 export const submitAuthor = async (obj) => {
+
     const graphCMSAssetUploadEndpoint = process.env.NEXT_PUBLIC_GRAPHCMS_ASSET_UPLOAD_ENDPOINT;
     // Upload Image
     const form = new FormData();
@@ -11,22 +12,20 @@ export const submitAuthor = async (obj) => {
             Authorization: process.env.NEXT_PUBLIC_GRAPHCMS_TOKEN,
         },
         body: form,
-    }).then(response => { return response.json() })
+    }).then(response => {return response.json() })
 
     // Publish Image
-    updateAssetStage(result.id).then((id) => {
+    return updateAssetStage(result.id).then((id) => {
         const assetId = id;
         if (assetId !== undefined) {
             // create Author
             const { fullName, username, email, about, password } = obj;
             let id = assetId;
             const authorObject = { id, fullName, username, email, about, password }
-            creareAuthor(authorObject).then((authorId) => {
-                console.log(authorId);
-
+            return creareAuthor(authorObject).then((authorId) => {
                 if (authorId !== undefined) {
                     // Publish Author
-                    updateAuthorStage(authorId).then((userData) => {
+                    return updateAuthorStage(authorId).then((userData) => {
                         return userData;
                     })
                 }
