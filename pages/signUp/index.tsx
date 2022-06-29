@@ -24,6 +24,9 @@ export default function index() {
     submitAuthor(data).then((res: any) => {
       setLoading(false);
       setSubmitted(true);
+      console.log(res);
+
+      localStorage.setItem("UserData", JSON.stringify(res));
       setTimeout(() => {
         router.push("/");
       }, 5000);
