@@ -34,9 +34,9 @@ export default function index() {
 
   return (
     <Layout>
-      <div className="pl-24 lg:pl-72 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
+      <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col justify-center items-center">
         <form
-          className="relative w-full px-16"
+          className="relative w-full pr-8"
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className="text-orange text-4xl mb-10 text-center">

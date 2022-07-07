@@ -13,6 +13,8 @@ interface Avatar {
   url: string;
 }
 const Avater = ({ user }: Props) => {
+  console.log(user);
+
   const [option, setOption] = useState(false);
   const route = useRouter();
   const logoutHandler = () => {
@@ -53,7 +55,7 @@ const Avater = ({ user }: Props) => {
           <div
             className={`transition-all duration-300 absolute ${
               option ? "top-0" : "-top-96"
-            }  right-0 mt-14 py-5 shadow-lg bg-hr rounded-xl h-auto w-40`}
+            }  right-0 mt-14 py-5 shadow-lg bg-hovColor rounded-xl h-auto w-40`}
           >
             <ul>
               <li

@@ -35,12 +35,8 @@ interface Avatar {
 
 export default function Main({ videos }: Props) {
   return (
-    <div className="text-gray-600 body-font bg-transparent pl-24 lg:pl-72 mt-10">
+    <div className="text-gray-600 body-font bg-transparent pl-24 sm:pl-28 md:pl-40 lg:pl-60 mt-10">
       <div className="container px-5 py-24 mx-auto">
-        {/* <div className="mb-10">
-              <MiniVideo />
-            </div> */}
-
         <div className="flex flex-wrap -m-3">
           {videos.map((video: Video) => (
             <React.Fragment key={video.id}>
@@ -55,7 +51,6 @@ export default function Main({ videos }: Props) {
               />
             </React.Fragment>
           ))}
-          {/* <Finised></Finised> */}
         </div>
       </div>
     </div>

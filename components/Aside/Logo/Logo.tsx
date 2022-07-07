@@ -1,16 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export default function Logo() {
   return (
     <Link href="/">
       <div
-        title="Carrot Stram"
-        className="flex justify-between cursor-pointer items-center flex-col lg:px-10 mb-5"
+        title="Carrot Stream"
+        className="flex justify-center xl:justify-between items-center cursor-pointer  xl:flex-col xl:px-5 mb-5"
       >
         <Image src="/src/img/logo.svg" width="70%" height="40px" />
-        <span className="text-orange hidden lg:block lg:text-xl font-extrabold">
+        <span className="-mt-2 text-orange hidden lg:block lg:text-md xl:text-xl font-extrabold">
           Carrot Stream
         </span>
       </div>

@@ -155,6 +155,33 @@ export const createUser = async (name) => {
   return author;
 };
 
+export const isAuthorLoggedIn = async (email, pass) => {
+  const query = gql`
+  query MyQuery {
+    author(where: {email: "${email}"}) {
+      password
+      email
+      avatar {
+        url(transformation: {image: {resize: {width: 200, height: 200, fit: crop}}})
+      }
+          fullName
+          username
+          about
+    }
+  }
+`;
+  const result = await gqlClient.request(query);
+  const password = result.author.password;
+  if (password === pass) {
+    localStorage.setItem('UserData',JSON.stringify(result.author))
+    return{
+      status:true
+    }
+  }
+  return {
+    status:false
+  };
+}
 
 
 // MUTATIONS ============================================================
@@ -189,7 +216,7 @@ export const updateAuthorStage = async (id) => {
     publishAuthor(where: { id: "${id}" }, to: PUBLISHED){
           email
           avatar {
-            url
+            url(transformation: {image: {resize: {width: 200, height: 200, fit: crop}}})
           }
           fullName
           username
@@ -201,3 +228,6 @@ export const updateAuthorStage = async (id) => {
   const author = result.publishAuthor;
   return author;
 }
+
+
+

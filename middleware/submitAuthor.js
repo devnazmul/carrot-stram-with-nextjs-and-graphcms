@@ -1,7 +1,6 @@
 import { creareAuthor, updateAssetStage, updateAuthorStage } from "../services";
 
 export const submitAuthor = async (obj) => {
-
     const graphCMSAssetUploadEndpoint = process.env.NEXT_PUBLIC_GRAPHCMS_ASSET_UPLOAD_ENDPOINT;
     // Upload Image
     const form = new FormData();
@@ -38,6 +37,4 @@ export const submitAuthor = async (obj) => {
             }
         }
     });
-
-
 }

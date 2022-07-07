@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
-import Avater from "../../Avater/Avater";
 
 interface Props {
   videoSlug: string;
@@ -60,11 +59,11 @@ function VideoCard({
 }: Props) {
   return (
     <Link href={`video/${videoSlug}`}>
-      <div className="cursor-pointer h-full px-5 lg:w-1/3 md:w-1/2 w-full">
-        <a className="block relative w-full overflow-hidden mb-1  rounded shadow-lg">
+      <div className="cursor-pointer hover:shadow-2xl mb-5 rounded-3xl h-full px-2 sm:w-1/2 md:w-1/2 lg:w-1/3 w-full">
+        <a className="block relative w-full overflow-hidden mb-2 rounded">
           {thumbnailUrl && (
             <Image
-              alt="ecommerce"
+              alt="e-commerce"
               height="720px"
               width="1280px"
               className="object-cover object-center w-full h-full block rounded-3xl"
@@ -72,18 +71,23 @@ function VideoCard({
             />
           )}
         </a>
-        <div className="flex items-center justify-between mb-10 ">
+        <div className="flex items-center justify-between mb-5">
           <div className="flex">
             <div className="">
               <div className="flex">
-                <div>
-                  <Avater name={channelName} src={channelAvater} />
+                <div title={channelName} className="">
+                  <Image
+                    alt={channelName}
+                    src={channelAvater}
+                    height={70}
+                    width={70}
+                  />
                 </div>
-                <div className="">
+                <div className="ml-3">
                   {title && (
                     <p className="text-gray-100 h-10 title-font text-sm font-medium overflow-hidden">
                       {title.length > 65
-                        ? title.substring(0, 65) + ` ....`
+                        ? title.substring(0, 60) + ` ....`
                         : title}
                     </p>
                   )}

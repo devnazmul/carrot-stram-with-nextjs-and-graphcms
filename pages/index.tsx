@@ -17,7 +17,7 @@ export default function Page({ videos }: Props) {
   return (
     <div className="bg-primary h-screen text-icon">
       <Head>
-        <title>Carrot Stram</title>
+        <title>Carrot Stream</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main videos={videos} />
