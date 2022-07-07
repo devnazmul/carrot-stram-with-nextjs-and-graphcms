@@ -15,7 +15,7 @@ export default function Logo() {
           width="40px"
           height="40px"
         />
-        <span className="-mt-2 text-orange hidden lg:block lg:text-md xl:text-xl font-extrabold">
+        <span className="text-orange hidden lg:block lg:text-md xl:text-xl font-extrabold">
           Carrot Stream
         </span>
       </div>
