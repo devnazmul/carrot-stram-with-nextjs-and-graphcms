@@ -60,7 +60,7 @@ function VideoCard({
   return (
     <Link href={`video/${videoSlug}`}>
       <div className="cursor-pointer hover:shadow-2xl mb-5 rounded-3xl h-full px-2 sm:w-1/2 md:w-1/2 lg:w-1/3 w-full">
-        <a className="block relative w-full overflow-hidden mb-2 rounded">
+        <span className="block relative w-full overflow-hidden mb-2 rounded">
           {thumbnailUrl && (
             <Image
               loading={"lazy"}
@@ -71,7 +71,7 @@ function VideoCard({
               src={thumbnailUrl}
             />
           )}
-        </a>
+        </span>
         <div className="flex items-center justify-between mb-5">
           <div className="flex">
             <div className="">
