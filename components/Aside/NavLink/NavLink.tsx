@@ -15,7 +15,7 @@ export default function NavLink({ Icon, title, href, active }: Props) {
       {href && (
         <Link href={href}>
           <div
-            className={`py-4 hover:bg-hovColor cursor-pointer ${
+            className={`py-4 hover:bg-white cursor-pointer text-white hover:text-black ${
               useRouter().pathname === href ? "bg-hovColor" : "bg-transparent"
             } md:px-2 lg:px-10 flex items-center justify-center md:justify-start`}
           >
@@ -26,7 +26,7 @@ export default function NavLink({ Icon, title, href, active }: Props) {
                 }`}
               />
             )}
-            {title && <div className="text-white hidden md:block">{title}</div>}
+            {title && <div className=" hidden md:block">{title}</div>}
           </div>
         </Link>
       )}
