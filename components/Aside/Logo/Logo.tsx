@@ -12,7 +12,7 @@ export default function Logo() {
           alt={"carrot_stream"}
           loading={"lazy"}
           src="/src/img/logo.svg"
-          width="70%"
+          width="40px"
           height="40px"
         />
         <span className="-mt-2 text-orange hidden lg:block lg:text-md xl:text-xl font-extrabold">
