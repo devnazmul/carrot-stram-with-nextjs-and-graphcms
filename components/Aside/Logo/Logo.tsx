@@ -9,6 +9,7 @@ export default function Logo() {
         className="flex justify-center xl:justify-between items-center cursor-pointer  xl:flex-col xl:px-5 mb-5"
       >
         <Image
+          alt={"carrot_stream"}
           loading={"lazy"}
           src="/src/img/logo.svg"
           width="70%"

@@ -45,6 +45,7 @@ export default function index() {
               >
                 {!thumbnail && (
                   <Image
+                    alt={"empty"}
                     loading={"lazy"}
                     src={"https://i.ibb.co/qWvBRhc/001-photo.png"}
                     height={50}

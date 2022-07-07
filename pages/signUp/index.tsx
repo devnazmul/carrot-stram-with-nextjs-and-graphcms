@@ -49,6 +49,7 @@ export default function index() {
               className="bg-hr cursor-pointer overflow-hidden w-44 text-6xl text-orange border-4 border-orange h-44 rounded-full mb-5 justify-center items-center flex"
             >
               <Image
+                alt={"profile_pic"}
                 loading={"lazy"}
                 src={`${
                   imageUrl ? imageUrl : "https://i.ibb.co/qWvBRhc/001-photo.png"

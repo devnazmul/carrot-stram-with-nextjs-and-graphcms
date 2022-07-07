@@ -41,6 +41,7 @@ const Avater = ({ user }: Props) => {
         >
           {user?.avatar?.url && (
             <Image
+              alt={user.fullName}
               loading={"lazy"}
               title={user.fullName}
               src={user.avatar.url}
