@@ -11,7 +11,7 @@ export default function Logo() {
         <Image
           alt={"carrot_stream"}
           loading={"lazy"}
-          src="/src/img/logo.svg"
+          src="/src/img/logo.png"
           width="40px"
           height="40px"
         />
