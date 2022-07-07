@@ -42,7 +42,7 @@ export default function Aside() {
   }, []);
 
   return (
-    <div className="flex flex-col w-1/6 bg-hovColor z-20 fixed rounded-r-3xl py-5 h-full">
+    <div className="flex flex-col w-1/6 bg-secondery z-20 fixed rounded-r-3xl py-5 h-full">
       <Logo />
       <div className="scrollbar-thin scrollbar-thumb-yellow-900 hover:scrollbar-thumb-orange transition-all duration-500 scrollbar-track-secondery overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full ">
         <div className="">
