@@ -63,6 +63,7 @@ function VideoCard({
         <a className="block relative w-full overflow-hidden mb-2 rounded">
           {thumbnailUrl && (
             <Image
+              loading={"lazy"}
               alt="e-commerce"
               height="720px"
               width="1280px"
@@ -77,6 +78,7 @@ function VideoCard({
               <div className="flex">
                 <div title={channelName} className="">
                   <Image
+                    loading={"lazy"}
                     alt={channelName}
                     src={channelAvater}
                     height={70}

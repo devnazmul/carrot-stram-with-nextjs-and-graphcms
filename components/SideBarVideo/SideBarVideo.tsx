@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface Props {
   video: Array<Video>;
@@ -29,6 +29,7 @@ export default function SideBarVideo({ video }: Props) {
     <div className="pt-5 flex items-center flex-col px-2 w-full">
       <div className="bg-secondery  relative cursor-pointer overflow-hidden w-full h-40 rounded-xl mt-4   ">
         <Image
+          loading={"lazy"}
           title={video[0].channel.videos[0].title}
           src={video[0].channel.videos[0].thumbnail.url}
           height="200px"

@@ -27,7 +27,12 @@ export default function index({ playlists }: Props) {
     <Layout>
       {!isHavePlaylist ? (
         <div className="pl-24 lg:pl-72 h-screen w-full flex text-gray-600 font-bold flex-col  justify-center items-center">
-          <Image src={"/src/img/not-found.png"} width="300px" height="300px" />
+          <Image
+            loading={"lazy"}
+            src={"/src/img/not-found.png"}
+            width="300px"
+            height="300px"
+          />
           <span className="text-xl lg:text-5xl lg:mt-10">
             please{" "}
             <Link href={"/logIn"}>

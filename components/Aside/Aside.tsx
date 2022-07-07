@@ -113,6 +113,7 @@ export default function Aside() {
                     <Link key={channel.id} href="/">
                       <div className="flex cursor-pointer items-center justify-center lg:justify-start mb-1 hover:bg-hovColor py-2 px-1 xl:px-10">
                         <Image
+                          loading={"lazy"}
                           height="30px"
                           width="30px"
                           alt={channel.channelName}

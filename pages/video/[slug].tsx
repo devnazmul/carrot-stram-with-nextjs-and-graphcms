@@ -1,5 +1,4 @@
 import { GetServerSideProps } from "next";
-import Image from "next/image";
 import Layout from "../../components/Layout/Layout";
 import SingleVideo from "../../components/SingleVideo/SingleVideo";
 import { getSingleVideo } from "../../services";
@@ -46,10 +45,12 @@ export default function Video({ video }: Props) {
               <SingleVideo video={video} />
             </div>
 
-            <div className="w-3/12 overflow-y-auto fixed top-16 pt-10 pr-5 right-0 h-screen  hidden ">
+            {/* <div className="w-3/12 overflow-y-auto fixed top-16 pt-10 pr-5 right-0 h-screen  hidden ">
               <div className="bg-secondery sticky -top-10 z-10 shadow-xl pt-10 w-full py-5 rounded-xl px-5">
                 <div className="flex justify-center items-center cursor-pointer">
                   <Image
+                    height={20}
+                    width={20}
                     src={video[0].channel.channelLogo.url}
                     alt={video[0].channel.channelName}
                   />
@@ -62,8 +63,8 @@ export default function Video({ video }: Props) {
                 </span>
               </div>
 
-              {/* <SideBarVideo video={video} /> */}
-            </div>
+              <SideBarVideo video={video} />
+            </div> */}
           </div>
         </div>
       }

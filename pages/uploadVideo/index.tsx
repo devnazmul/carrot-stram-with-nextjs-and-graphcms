@@ -45,6 +45,7 @@ export default function index() {
               >
                 {!thumbnail && (
                   <Image
+                    loading={"lazy"}
                     src={"https://i.ibb.co/qWvBRhc/001-photo.png"}
                     height={50}
                     width={50}
@@ -57,6 +58,7 @@ export default function index() {
                 className="bg-hr cursor-pointer w-1/3 text-6xl text-orange border-4 border-orange h-40 rounded-lg mb-5 justify-center items-center flex"
               >
                 <Image
+                  loading={"lazy"}
                   src={"https://i.ibb.co/k4gmjf8/002-upload.png"}
                   height={50}
                   width={50}

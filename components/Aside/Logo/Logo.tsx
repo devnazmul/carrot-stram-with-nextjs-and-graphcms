@@ -8,7 +8,12 @@ export default function Logo() {
         title="Carrot Stream"
         className="flex justify-center xl:justify-between items-center cursor-pointer  xl:flex-col xl:px-5 mb-5"
       >
-        <Image src="/src/img/logo.svg" width="70%" height="40px" />
+        <Image
+          loading={"lazy"}
+          src="/src/img/logo.svg"
+          width="70%"
+          height="40px"
+        />
         <span className="-mt-2 text-orange hidden lg:block lg:text-md xl:text-xl font-extrabold">
           Carrot Stream
         </span>
