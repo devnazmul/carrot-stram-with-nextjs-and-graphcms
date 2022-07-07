@@ -17,6 +17,13 @@ export default function Page({ videos }: Props) {
   return (
     <div className="bg-primary h-screen text-icon">
       <Head>
+        <meta charSet={"UTF-8"} />
+        <meta
+          name="keywords"
+          content="stream, video, devnazmul, carrot_stream, carrot stream, video streaming app with next js"
+        />
+        <meta name="author" content="Md Nazmul Islam" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Carrot Stream</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>

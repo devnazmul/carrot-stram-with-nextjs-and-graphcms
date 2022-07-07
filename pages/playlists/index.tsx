@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -22,10 +23,21 @@ interface Playlist {
 }
 
 export default function index({ playlists }: Props) {
+  const [user, setUser] = React.useState();
+  React.useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("UserData") || "false"));
+  }, []);
   const [isHavePlaylist, setIsHavePlaylist] = React.useState(false);
   return (
     <Layout>
-      {!isHavePlaylist ? (
+      <Head>
+        <title>Playlist | Carrot Stream</title>
+        <meta
+          name="description"
+          content="In this page your playlists was stored"
+        />
+      </Head>
+      {!user ? (
         <div className="pl-24 lg:pl-72 h-screen w-full flex text-gray-600 font-bold flex-col  justify-center items-center">
           <Image
             alt={"not_found"}

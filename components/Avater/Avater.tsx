@@ -13,8 +13,6 @@ interface Avatar {
   url: string;
 }
 const Avater = ({ user }: Props) => {
-  console.log(user);
-
   const [option, setOption] = useState(false);
   const route = useRouter();
   const logoutHandler = () => {

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,6 +26,13 @@ export default function index() {
 
   return (
     <Layout>
+      <Head>
+        <title>Upload Video | Carrot Stream</title>
+        <meta
+          name="description"
+          content="In this page you can upload video on your channel"
+        />
+      </Head>
       {haveChannel ? (
         <div className="pl-24 lg:pl-72 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
           <form className="w-full px-16" onSubmit={handleSubmit(onSubmit)}>

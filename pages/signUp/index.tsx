@@ -1,4 +1,5 @@
 import { Orbit } from "@uiball/loaders";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -34,6 +35,13 @@ export default function index() {
 
   return (
     <Layout>
+      <Head>
+        <title>Sign Up | Carrot Stream</title>
+        <meta
+          name="description"
+          content="In this page you can create your CS account"
+        />
+      </Head>
       <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col justify-center items-center">
         <form
           className="relative w-full pr-8"
