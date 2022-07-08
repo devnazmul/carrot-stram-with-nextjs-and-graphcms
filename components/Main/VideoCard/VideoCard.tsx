@@ -64,7 +64,7 @@ function VideoCard({
           {thumbnailUrl && (
             <Image
               loading={"lazy"}
-              alt="e-commerce"
+              alt={channelName}
               height="720px"
               width="1280px"
               className="object-cover object-center w-full h-full block rounded-3xl"
