@@ -27,7 +27,7 @@ interface ChannelLogo {
 export default function Aside() {
   const [channels, setChannels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<any | null>();
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("UserData") || "false"));
@@ -98,8 +98,8 @@ export default function Aside() {
           <>
             <div className="">
               <div className="pb-5 pt-3 text-xl font-bold text-hr flex justify-center items-center lg:px-10">
-                <MdSubscriptions className="text-orange hidden lg:block" />
-                <div className="lg:ml-3 font-semibold text-xs lg:text-xl text-white">
+                <MdSubscriptions className="text-orange block" />
+                <div className="lg:ml-3 font-semibold hidden lg:block lg:text-xl text-white">
                   Subscriptions
                 </div>
               </div>
@@ -109,7 +109,7 @@ export default function Aside() {
                     <LoadingComponent />
                   </div>
                 ) : (
-                  channels.map((channel: Channel) => (
+                  user?.subscriptions.map((channel: Channel) => (
                     <Link key={channel.id} href="/">
                       <div className="flex cursor-pointer items-center justify-center lg:justify-start mb-1 hover:bg-hovColor py-2 px-1 xl:px-10">
                         <Image
@@ -119,7 +119,7 @@ export default function Aside() {
                           width="30px"
                           src={channel.channelLogo.url}
                         />
-                        <span className="hidden xl:block ml-3 text-sm">
+                        <span className="hidden md:block ml-3 text-sm">
                           {" "}
                           {channel.channelName}
                         </span>
