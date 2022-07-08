@@ -1,7 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { BiPlus } from "react-icons/bi";
 import Layout from "../../components/Layout/Layout";
 
 type Inputs = {
@@ -117,21 +119,24 @@ export default function index() {
           </form>
         </div>
       ) : (
-        <div className="pl-24 lg:pl-72 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
-          <form className="w-full px-16" onSubmit={handleSubmit(onSubmit)}>
-            <Image
-              src={"/src/img/empty.png"}
-              width={200}
-              height={200}
-              loading={"lazy"}
-            />
-            <h1 className="text-hr text-4xl mb-10 text-center">
-              You have no channel!
-            </h1>
-            <p className="text-hr text-center">
-              for upload a video you have to create a channel first.
-            </p>
-          </form>
+        <div className="pl-24 lg:pl-72 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center relative">
+          <Link href={"/createChannel"}>
+            <span className="transition-all hover:scale-105 duration-150 absolute right-10 top-28 cursor-pointer bg-orange rounded-full px-5 py-3 flex justify-center items-center text-hovColor">
+              <BiPlus className="text-2xl" /> Create channel
+            </span>
+          </Link>
+          <Image
+            src={"/src/img/empty.png"}
+            width={200}
+            height={200}
+            loading={"lazy"}
+          />
+          <h1 className="text-hr text-4xl mb-2 text-center">
+            You have no channel!
+          </h1>
+          <p className="text-hr text-center">
+            for upload a video you have to create a channel first.
+          </p>
         </div>
       )}
     </Layout>

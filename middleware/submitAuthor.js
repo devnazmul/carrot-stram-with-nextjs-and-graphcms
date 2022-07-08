@@ -18,9 +18,9 @@ export const submitAuthor = async (obj) => {
         const assetId = id;
         if (assetId !== undefined) {
             // create Author
-            const { fullName, username, email, about, password } = obj;
+            const { slug, fullName, username, email, about, password } = obj;
             let id = assetId;
-            const authorObject = { id, fullName, username, email, about, password }
+            const authorObject = { id, slug, fullName, username, email, about, password }
             return creareAuthor(authorObject).then((authorId) => {
                 if (authorId !== undefined) {
                     // Publish Author

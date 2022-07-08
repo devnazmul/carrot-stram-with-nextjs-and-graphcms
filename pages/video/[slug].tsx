@@ -39,7 +39,7 @@ export default function Video({ video }: Props) {
   return (
     <Layout>
       {
-        <div className="text-gray-600 body-font h-screen w-full bg-transparent pl-24 md:pl-48 lg:pl-72 sm:pl-32 pt-7 mt-10">
+        <div className="text-gray-600 body-font h-screen w-full bg-transparent pl-12 md:pl-48 lg:pl-56 sm:pl-32 pt-7 mt-10">
           <div className="w-full h-full flex mt-10">
             <div className="w-full xl:w-full px-5">
               <SingleVideo video={video} />
