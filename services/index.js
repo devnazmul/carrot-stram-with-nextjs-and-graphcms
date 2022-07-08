@@ -164,22 +164,38 @@ export const isAuthorLoggedIn = async (email, pass) => {
       avatar {
         url(transformation: {image: {resize: {width: 200, height: 200, fit: crop}}})
       }
-          fullName
-          username
-          about
+      fullName
+      username
+      about
+      channels {
+        channelName
+        id
+        slug
+        channelLogo {
+          url(transformation: {image: {resize: {height: 200, width: 200}}})
+        }
+      }
+      subscriptions {
+        channelLogo {
+          url
+        }
+        channelName
+        slug
+        id
+      }
     }
   }
 `;
   const result = await gqlClient.request(query);
   const password = result.author.password;
   if (password === pass) {
-    localStorage.setItem('UserData',JSON.stringify(result.author))
-    return{
-      status:true
+    localStorage.setItem('UserData', JSON.stringify(result.author))
+    return {
+      status: true
     }
   }
   return {
-    status:false
+    status: false
   };
 }
 
@@ -214,20 +230,33 @@ export const updateAuthorStage = async (id) => {
   const query = gql`
   mutation MyMutation {
     publishAuthor(where: { id: "${id}" }, to: PUBLISHED){
-          email
-          avatar {
-            url(transformation: {image: {resize: {width: 200, height: 200, fit: crop}}})
-          }
-          fullName
-          username
-          about
+      email
+      avatar {
+        url(transformation: {image: {resize: {width: 200, height: 200, fit: crop}}})
+      }
+      fullName
+      username
+      about
+      channels {
+        channelName
+        id
+        slug
+        channelLogo {
+          url(transformation: {image: {resize: {height: 200, width: 200}}})
+        }
+      }
+      subscriptions {
+        channelLogo {
+          url
+        }
+        channelName
+        slug
+        id
+      }
+    }
   }
-}
 `;
   const result = await gqlClient.request(query);
   const author = result.publishAuthor;
   return author;
 }
-
-
-
