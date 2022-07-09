@@ -1,9 +1,9 @@
 import { gql } from "graphql-request";
 
-export const getUsersChannelQuery = async (gqlClient,slug) => {
+export const getUserChannelsQuery = async (gqlClient,slug) => {
     const query = gql`
     query getUserChannels {
-      author(where: {slug: ${slug}}) {
+      author(where: {slug: "${slug}"}) {
         channels {
           channelName
           channelLogo {
@@ -15,6 +15,6 @@ export const getUsersChannelQuery = async (gqlClient,slug) => {
     }
   `;
     const result = await gqlClient.request(query);
-    const channel = result;
-    return channel;
+    const channels = result.author.channels;
+    return channels;
   }

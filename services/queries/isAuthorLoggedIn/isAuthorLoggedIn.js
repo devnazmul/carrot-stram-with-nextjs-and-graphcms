@@ -19,6 +19,7 @@ export const isAuthorLoggedInQuery = async (gqlClient,email, pass) => {
     const result = await gqlClient.request(query);
     const password = result.author.password;
     if (password === pass) {
+      delete result.author.password;
       localStorage.setItem('UserData', JSON.stringify(result.author))
       return {
         status: true

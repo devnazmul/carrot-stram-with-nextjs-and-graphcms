@@ -8,18 +8,18 @@ import Layout from "../../components/Layout/Layout";
 import { submitAuthor } from "../../middleware/submitAuthor";
 
 export default function index() {
+  const { register, handleSubmit } = useForm();
+
   const [user, setUser] = useState();
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("UserData") || "false"));
-  }, []);
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string | null>();
 
   const router = useRouter();
   user && router.push("/");
 
-  const [imageUrl, setImageUrl] = useState<string | null>();
-  const { register, handleSubmit } = useForm();
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("UserData") || "false"));
+  }, []);
 
   const onSubmit = (data: any) => {
     // set loading true and scroll to top
@@ -32,11 +32,10 @@ export default function index() {
     // post formData object to api/author
     submitAuthor(data).then((res: any) => {
       setLoading(false);
-      setSubmitted(true);
       localStorage.setItem("UserData", JSON.stringify(res));
       setTimeout(() => {
         router.push("/");
-      }, 2000);
+      }, 1000);
     });
   };
 

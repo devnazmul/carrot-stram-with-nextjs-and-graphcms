@@ -38,7 +38,7 @@ export default function index({ playlists }: Props) {
         />
       </Head>
       {!user ? (
-        <div className="pl-24 lg:pl-72 h-screen w-full flex text-gray-600 font-bold flex-col  justify-center items-center">
+        <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 h-screen w-full flex  text-gray-600 font-bold flex-col  justify-center items-center">
           <Image
             alt={"not_found"}
             loading={"lazy"}
@@ -57,8 +57,8 @@ export default function index({ playlists }: Props) {
           </span>
         </div>
       ) : (
-        <div className="pl-24 lg:pl-72 h-screen w-full flex justify-center items-center mt-10">
-          <div className="w-full flex flex-col px-10">
+        <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 h-screen w-full flex justify-center">
+          <div className="w-full flex flex-col pr-12">
             {playlists.map((playlist: Playlist) => (
               <React.Fragment key={playlist.id}>
                 <Playlist

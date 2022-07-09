@@ -3,8 +3,7 @@ import { gql } from "graphql-request";
 export const updateAssetStageMutation = async (gqlClient,id) => {
     const query = gql`
     mutation MyMutation {publishAsset(where: { id: "${id}" }, to: PUBLISHED){
-      id,
-      url
+      id
     }}
   `;
     const result = await gqlClient.request(query);

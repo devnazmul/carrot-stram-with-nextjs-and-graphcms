@@ -10,13 +10,13 @@ import {
   MdSubscriptions,
 } from "react-icons/md";
 import { RiPlayList2Fill } from "react-icons/ri";
-import { getSubscribedChannels } from "../../services/index";
+import { getUserSubscriptions } from "../../services/index";
 import LoadingComponent from "../Loading/LoadingComponent";
 import Logo from "./Logo/Logo";
 import NavLink from "./NavLink/NavLink";
 
 interface Channel {
-  id: string;
+  slug: string;
   channelName: string;
   channelLogo: ChannelLogo;
 }
@@ -25,21 +25,20 @@ interface ChannelLogo {
 }
 
 export default function Aside() {
-  const [channels, setChannels] = useState([]);
+  const [subscriptions, setSubscriptions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<any | null>();
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("UserData") || "false"));
-    const getSubscriptions = async () => {
-      const videos = (await getSubscribedChannels()) || [];
-      return videos;
-    };
-    getSubscriptions().then((data) => {
-      setChannels(data);
-      setIsLoading(false);
-    });
   }, []);
+  useEffect(() => {
+    user &&
+      getUserSubscriptions(user.slug).then((data) => {
+        setSubscriptions(data);
+        setIsLoading(false);
+      });
+  }, [user]);
 
   return (
     <div className="flex flex-col w-1/6 bg-secondery z-20 fixed rounded-r-3xl py-5 h-full">
@@ -109,8 +108,8 @@ export default function Aside() {
                     <LoadingComponent />
                   </div>
                 ) : (
-                  user?.subscriptions.map((channel: Channel) => (
-                    <Link key={channel.id} href="/">
+                  subscriptions.map((channel: Channel) => (
+                    <Link key={channel.slug} href={`/channel/${channel.slug}`}>
                       <div className="flex cursor-pointer items-center justify-center lg:justify-start mb-1 hover:bg-hovColor py-2 px-1 xl:px-10">
                         <Image
                           alt={channel.channelName}

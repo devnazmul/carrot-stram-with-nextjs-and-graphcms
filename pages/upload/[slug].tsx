@@ -1,14 +1,19 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Layout from "../../components/Layout/Layout";
+import { submitVideo } from "../../middleware/submitVideo";
 
 type Inputs = {
   example: string;
   exampleRequired: string;
 };
+
 function index({ slug }: any) {
+  const [loading, setLoading] = useState(false);
   const [thumbnail, setThumbnail] = useState<string | null>();
+  const router = useRouter();
 
   const {
     register,
@@ -16,7 +21,37 @@ function index({ slug }: any) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => console.log(data);
+  const genRand = (name: string, len: number) => {
+    return `${name}-${Math.random()
+      .toString(36)
+      .substring(2, len + 2)}-${Math.random()
+      .toString(36)
+      .substring(2, len + 2)}-${Math.random()
+      .toString(36)
+      .substring(2, len + 2)}`;
+  };
+
+  const onSubmit = (data: any) => {
+    // set loading true and scroll to top
+    setLoading(true);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+    data.channelSlug = slug;
+    data.slug = genRand(data.title, 10);
+
+    // post formData object to api/author
+    submitVideo(data).then((res: any) => {
+      setLoading(false);
+      console.log(res);
+      // setTimeout(() => {
+      //   router.push("/");
+      // }, 1000);
+    });
+  };
+
   return (
     <Layout>
       <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
@@ -29,7 +64,7 @@ function index({ slug }: any) {
             className="rounded-lg px-5 py-5 w-full mb-5 bg-hr text-orange"
             placeholder="Title"
             type="text"
-            {...register("Title", { required: true, maxLength: 80 })}
+            {...register("title", { required: false, maxLength: 80 })}
           />
           <span className="flex flex-col lg:flex-row justify-between items-center">
             <label
@@ -73,13 +108,13 @@ function index({ slug }: any) {
             <input
               id="ut"
               className="rounded-lg hidden px-5 py-5 w-full mb-5"
-              placeholder="thumbnail"
+              placeholder="Thumbnail"
               type="file"
-              {...register("Thumbnail", {
+              {...register("thumbnail", {
                 onChange: (e) => {
                   setThumbnail(URL.createObjectURL(e.target.files[0]));
                 },
-                required: true,
+                required: false,
               })}
             />
             <input
@@ -88,7 +123,7 @@ function index({ slug }: any) {
               placeholder="videoContent"
               type="file"
               accept="video/mp4,video/x-m4v,video/*"
-              {...register("Video", { required: true })}
+              {...register("videoContent", { required: false })}
             />
           </span>
 
@@ -96,22 +131,22 @@ function index({ slug }: any) {
             className="rounded-lg px-5 py-5 w-full mb-5 bg-hr text-orange"
             placeholder="description"
             rows={10}
-            {...register("Description", { required: false })}
+            {...register("description", { required: false })}
           />
           {/* <RichTextEditor value={value} onChange={onChange} /> */}
           <input
             className="rounded-lg hidden px-5 py-5 w-full mb-5"
             placeholder="channel"
             type="text"
-            {...register("Channel", { required: false })}
+            defaultValue={slug}
+            {...register("channel", { required: false })}
           />
-          <input
+          {/* <input
             className="rounded-lg px-5 py-5 w-full mb-5 bg-hr text-orange"
             placeholder="tags"
             type="text"
-            {...register("Tags", { required: true })}
-          />
-
+            {...register("Tags", { required: false })}
+          /> */}
           <input
             className="rounded-lg px-5 py-5 w-full mb-5 text-hr font-semibold cursor-pointer bg-orange"
             type="submit"
