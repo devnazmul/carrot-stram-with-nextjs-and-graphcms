@@ -1,7 +1,10 @@
+
 import { gql } from "graphql-request";
 
-export const getVideosQuery = gql`
-    query getVideos {
+
+export const getSubscribedChannelsQuery = async (gqlClient) => {
+  const query = gql`
+    query getSubscribedChannels {
       videos {
         id
         slug
@@ -22,7 +25,7 @@ export const getVideosQuery = gql`
       }
     }
     `;
-  
-
-  
-  
+  const result = await gqlClient.request(query);
+  const channels = result.channels;
+  return channels;
+}

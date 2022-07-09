@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import Layout from "../../components/Layout/Layout";
+import { getUsersChannel } from "../../services";
 
 type Inputs = {
   example: string;
@@ -12,14 +13,16 @@ type Inputs = {
 
 export default function index() {
   const [user, setUser] = useState<any | null>();
-  const [channels, setChannels] = useState([]);
+  const [channels, setChannels] = useState<any | null>([]);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("UserData") || "false"));
   }, []);
 
   console.log(user);
-
+  useEffect(() => {
+    setChannels(getUsersChannel(user.slug));
+  }, [user]);
   return (
     <Layout>
       <Head>

@@ -1,4 +1,4 @@
-import { creareAuthor, updateAssetStage, updateAuthorStage } from "../services";
+import { createAuthor, updateAssetStage, updateAuthorStage } from "../services";
 
 export const submitAuthor = async (obj) => {
     const graphCMSAssetUploadEndpoint = process.env.NEXT_PUBLIC_GRAPHCMS_ASSET_UPLOAD_ENDPOINT;
@@ -21,7 +21,7 @@ export const submitAuthor = async (obj) => {
             const { slug, fullName, username, email, about, password } = obj;
             let id = assetId;
             const authorObject = { id, slug, fullName, username, email, about, password }
-            return creareAuthor(authorObject).then((authorId) => {
+            return createAuthor(authorObject).then((authorId) => {
                 if (authorId !== undefined) {
                     // Publish Author
                     return updateAuthorStage(authorId).then((userData) => {
