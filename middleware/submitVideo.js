@@ -14,7 +14,7 @@ export const submitVideo = async (obj) => {
             Authorization: process.env.NEXT_PUBLIC_GRAPHCMS_TOKEN,
         },
         body: form1,
-    })
+    }).then(response => {return response.json() })
     // Upload Video
     const form2 = new FormData();
     form2.append("fileUpload", obj.thumbnail[0]);
@@ -24,7 +24,7 @@ export const submitVideo = async (obj) => {
             Authorization: process.env.NEXT_PUBLIC_GRAPHCMS_TOKEN,
         },
         body: form2,
-    })
+    }).then(response => {return response.json() })
 console.log('videoContent',result1);
 console.log('thumbnail',result2);
     // Publish Thumbnail
