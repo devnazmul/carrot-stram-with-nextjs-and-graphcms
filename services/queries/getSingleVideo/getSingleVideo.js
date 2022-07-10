@@ -30,7 +30,6 @@ export const getSingleVideoQuery = async (gqlClient,slug) => {
           }
         }
       }
-      tags
       videoContent {
         url
       }
