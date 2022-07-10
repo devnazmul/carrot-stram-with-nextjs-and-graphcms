@@ -122,7 +122,6 @@ function index({ slug }: any) {
               className="rounded-lg mt-5 hidden px-5 py-5 w-full mb-5"
               placeholder="videoContent"
               type="file"
-              accept="video/mp4,video/x-m4v,video/*"
               {...register("videoContent", { required: false })}
             />
           </span>
