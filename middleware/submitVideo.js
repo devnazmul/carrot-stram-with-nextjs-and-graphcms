@@ -15,7 +15,6 @@ export const submitVideo = async (obj) => {
         },
         body: form1,
     })
-    return result1
     // Upload Video
     const form2 = new FormData();
     form2.append("fileUpload", obj.thumbnail[0]);
@@ -26,7 +25,6 @@ export const submitVideo = async (obj) => {
         },
         body: form2,
     })
-
 
     // Publish Thumbnail
     updateAssetStage(result2.id).then((thumId) => {
