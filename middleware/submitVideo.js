@@ -25,7 +25,8 @@ export const submitVideo = async (obj) => {
         },
         body: form2,
     })
-
+console.log('videoContent',result1);
+console.log('thumbnail',result2);
     // Publish Thumbnail
     updateAssetStage(result2.id).then((thumId) => {
         if (thumId !== undefined) {
