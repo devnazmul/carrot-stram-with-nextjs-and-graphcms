@@ -9,7 +9,6 @@ export const updateVideoStageMutation = async (gqlClient,id) => {
       }
   `;
     const result = await gqlClient.request(query);
-    const author = result.publishVideo;
-    console.log(author);
-    return author;
+    const slug = result.publishVideo.slug;
+    return slug;
   }
