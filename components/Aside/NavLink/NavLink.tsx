@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import React from "react";
 import { IconType } from "react-icons/lib";
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 
 export default function NavLink({ Icon, title, href, active }: Props) {
   return (
-    <>
+    <React.Fragment>
       {href && (
         <Link href={href}>
           <div
@@ -30,6 +31,6 @@ export default function NavLink({ Icon, title, href, active }: Props) {
           </div>
         </Link>
       )}
-    </>
+    </React.Fragment>
   );
 }

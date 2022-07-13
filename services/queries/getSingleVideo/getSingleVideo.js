@@ -15,6 +15,7 @@ export const getSingleVideoQuery = async (gqlClient,slug) => {
         id
       }
       channel {
+        slug
         channelName
         channelLogo {
           url
@@ -37,9 +38,6 @@ export const getSingleVideoQuery = async (gqlClient,slug) => {
         id
       }
       description{
-        markdown
-        raw
-        text
         html
       }
     }

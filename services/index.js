@@ -6,6 +6,7 @@ import { updateVideoStageMutation } from './mutations/updateVideoStage/updateVid
 import { uploadVideoMutation } from './mutations/uploadVideo/uploadVideo';
 import { createUserQuery } from './queries/createUser/createUser';
 import { getPlaylistsQuery } from './queries/getPlaylist/getPlaylist';
+import { getSingleChannelQuery } from './queries/getSingleChannel/getSingleChannel';
 import { getSingleVideoQuery } from './queries/getSingleVideo/getSingleVideo';
 import { getUserChannelsQuery } from './queries/getUserChannels/getUserChannels';
 import { getUserSubscriptionsQuery } from './queries/getUserSubscriptions/getUserSubscriptions';
@@ -29,8 +30,8 @@ export const createAuthor = (authorObject) => {
 export const updateAuthorStage = (authorId) => {
   return updateAuthorStageMutation(gqlClient, authorId);
 }
-export const uploadVideo = (title, description, thumId, vidId, slug) => {
-  return uploadVideoMutation(gqlClient, title, description, thumId, vidId, slug);
+export const uploadVideo = (title,thumId,vidId,channelSlug,videoSlug) => {
+  return uploadVideoMutation(gqlClient, title,thumId,vidId,channelSlug,videoSlug);
 }
 export const updateVideoStage = (videoId) => {
   return updateVideoStageMutation(gqlClient, videoId);
@@ -57,4 +58,7 @@ export const isAuthorLoggedIn = (email, pass) => {
 }
 export const getUserChannels = (userSlug) => {
   return getUserChannelsQuery(gqlClient, userSlug);
+}
+export const getSingleChannel = (videoSlug) => {
+  return getSingleChannelQuery(gqlClient, videoSlug);
 }

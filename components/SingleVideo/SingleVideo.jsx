@@ -62,7 +62,7 @@ export default function SingleVideo({ video }) {
             Description{" "}
             <MdOutlineDescription className="ml-2 text-2xl bg-black p-1 rounded-full" />
           </h1>
-          <Markup className="w-full htmlContent" content={video[0].description.html} />
+          <Markup className="w-full htmlContent" content={video[0]?.description?.html} />
         </div>
       </div>
     </div>

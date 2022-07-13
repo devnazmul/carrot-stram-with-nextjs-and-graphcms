@@ -32,10 +32,12 @@ const Navbar = () => {
             {!user ? (
               <>
                 <Link href={"/logIn"}>
-                  <FiLogIn
-                    title="log in"
-                    className="text-hovColor cursor-pointer bg-orange mx-1 rounded-full p-3 w-11 h-11 text-3xl md:hidden"
-                  />
+                  <>
+                    <FiLogIn
+                      title="log in"
+                      className="text-hovColor cursor-pointer bg-orange mx-1 rounded-full p-3 w-11 h-11 text-3xl md:hidden"
+                    />
+                  </>
                 </Link>
                 <Link href={"/logIn"}>
                   <div className="w-16 md:w-24 mr-5 hover:shadow-xl cursor-pointer hidden md:flex justify-center text-sm items-center bg-hovColor py-3 h-full rounded-full px-1 md:px-5 text-orange font-bold">

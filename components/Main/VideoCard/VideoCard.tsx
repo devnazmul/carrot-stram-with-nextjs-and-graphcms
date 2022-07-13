@@ -11,6 +11,7 @@ interface Props {
   timeStamp: string;
   views: number;
   channelAvater: string;
+  slug: string;
 }
 
 // function get_time_diff(datetime: string) {
@@ -56,48 +57,58 @@ function VideoCard({
   timeStamp,
   views,
   channelAvater,
+  slug,
 }: Props) {
   return (
-    <Link href={`video/${videoSlug}`}>
+    <>
       <div className="cursor-pointer hover:shadow-2xl mb-5 rounded-3xl h-full px-2 sm:w-1/2 md:w-1/2 lg:w-1/3 w-full">
-        <span className="block relative w-full overflow-hidden mb-2 rounded">
-          {thumbnailUrl && (
-            <Image
-              loading={"lazy"}
-              alt={channelName}
-              height="720px"
-              width="1280px"
-              className="object-cover object-center w-full h-full block rounded-3xl"
-              src={thumbnailUrl}
-            />
-          )}
-        </span>
+        <Link href={`video/${videoSlug}`}>
+          <span className="block relative w-full overflow-hidden mb-2 rounded">
+            {thumbnailUrl && (
+              <Image
+                loading={"lazy"}
+                alt={channelName}
+                height="720px"
+                width="1280px"
+                className="object-cover object-center w-full h-full block rounded-3xl"
+                src={thumbnailUrl}
+              />
+            )}
+          </span>
+        </Link>
         <div className="flex items-center justify-between mb-5">
           <div className="flex">
             <div className="">
               <div className="flex">
-                <div title={channelName} className="">
-                  <Image
-                    loading={"lazy"}
-                    alt={channelName}
-                    src={channelAvater}
-                    height={70}
-                    width={70}
-                  />
-                </div>
+                <Link href={`/video/${slug}`}>
+                  <div title={channelName}>
+                    <Image
+                      className="rounded-full"
+                      loading={"lazy"}
+                      alt={channelName}
+                      src={channelAvater}
+                      height={70}
+                      width={70}
+                    />
+                  </div>
+                </Link>
                 <div className="ml-3">
-                  {title && (
-                    <p className="text-gray-100 h-10 title-font text-sm font-medium overflow-hidden">
-                      {title.length > 65
-                        ? title.substring(0, 60) + ` ....`
-                        : title}
-                    </p>
-                  )}
-                  {channelName && (
-                    <h3 className="text-gray-700 text-xs tracking-widest title-font mb-1">
-                      {channelName}
-                    </h3>
-                  )}
+                  <Link href={`video/${videoSlug}`}>
+                    <div>
+                      {title && (
+                        <p className="text-gray-100 h-10 title-font text-sm font-medium overflow-hidden">
+                          {title.length > 65
+                            ? title.substring(0, 60) + ` ....`
+                            : title}
+                        </p>
+                      )}
+                      {channelName && (
+                        <h3 className="text-gray-700 text-xs tracking-widest title-font mb-1">
+                          {channelName}
+                        </h3>
+                      )}
+                    </div>
+                  </Link>
                   <div className="text-xs tracking-widest flex items-center">
                     {views && views === 0 ? (
                       <span>0 views</span>
@@ -116,7 +127,7 @@ function VideoCard({
           </div>
         </div>
       </div>
-    </Link>
+    </>
   );
 }
 

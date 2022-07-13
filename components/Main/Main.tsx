@@ -21,6 +21,7 @@ interface Thumbnail {
   url: string;
 }
 interface Channel {
+  slug: string;
   url: string;
   channelLogo: ChannelLogo;
   channelName: string;
@@ -48,6 +49,7 @@ export default function Main({ videos }: Props) {
                 channelAvater={video.channel.channelLogo.url}
                 timeStamp={moment(video.publishedAt).fromNow()}
                 views={video.views.length}
+                slug={video.channel.slug}
               />
             </React.Fragment>
           ))}
