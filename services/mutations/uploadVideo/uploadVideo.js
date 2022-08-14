@@ -1,35 +1,32 @@
 import { gql } from "graphql-request";
 
-export const uploadVideoMutation = async (gqlClient,title,description,thumId,vidId,slug) => {
+export const uploadVideoMutation = async (gqlClient,title,description,thumId,videoLink,slug,channelSlug) => {
     const query = gql`
-        mutation createVideo {
-            createVideo(
-                data: {
-                    title: "${title}",
-                    description: "${description}",
-                    thumbnail: {
-                        connect: {
-                            id: "${thumId}"
-                        }
-                    }, 
-                    videoContent: {
-                        connect: {
-                            id: "${vidId}"
-                        }
-                    }, 
-                    channel: {
-                        connect: {
-                            slug: "${slug}"
-                        }
-                    }
-                }
-            ) {
-                id
-            }
+    mutation MyMutation {
+        createVideo(
+          data: {
+            title: "${title}", 
+            videoContent: "${videoLink}", 
+            description: "${description}", 
+            thumbnail: {
+              connect: {
+                id: "${thumId}"
+              }
+            }, 
+            channel: {
+              connect: {
+                slug: "${channelSlug}"
+              }
+            }, 
+            slug: "${slug}"
+          }
+        ) {
+          id
         }
+      }
+
     `;
     const result = await gqlClient.request(query)
     const authorId = result;
-    console.log(authorId);
     return authorId;
   }

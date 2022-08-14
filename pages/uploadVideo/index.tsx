@@ -1,4 +1,3 @@
-import { Orbit } from "@uiball/loaders";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -100,7 +99,7 @@ export default function index() {
         )
       ) : (
         <div className="absolute top-1/3 right-0 left-0 mx-auto max-w-max">
-          <Orbit size={70} speed={1.5} color="#f96c0f" />
+          Loading.......
         </div>
       )}
     </Layout>

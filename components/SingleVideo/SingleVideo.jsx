@@ -1,4 +1,3 @@
-import { Markup } from "interweave";
 import moment from "moment";
 import { BiCommentDetail, BiDislike, BiLike, BiShareAlt } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
@@ -6,15 +5,15 @@ import { MdOutlineDescription } from "react-icons/md";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 export default function SingleVideo({ video }) {
-  const url = video[0].videoContent.url;
+  const thumbnail = video[0].thumbnail.url
+  const url = video[0].videoContent;
   const views = video[0].views.length;
   const timeStamp = moment(video[0].publishedAt).format("DD MMM , YYYY");
-  
   
 
   return (
     <div className="px-5">
-      <VideoPlayer url={url} />
+      <VideoPlayer thumbnail={thumbnail} url={url} />
 
       <div className="px-5">
         <h1 className="xl:text-3xl lg:text-2xl md:text-2xl sm:text-2xl text-xl mt-3 font-medium">
@@ -62,7 +61,10 @@ export default function SingleVideo({ video }) {
             Description{" "}
             <MdOutlineDescription className="ml-2 text-2xl bg-black p-1 rounded-full" />
           </h1>
-          <Markup className="w-full htmlContent" content={video[0]?.description?.html} />
+          <p>
+          {video[0]?.description}
+          </p>
+          {/* <Markup className="w-full htmlContent" content={video[0]?.description?.html} /> */}
         </div>
       </div>
     </div>

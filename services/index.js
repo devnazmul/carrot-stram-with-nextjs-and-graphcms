@@ -21,17 +21,22 @@ const gqlClient = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT, {
 });
 
 // MUTATIONS ============================================================
-export const updateAssetStage = (assetId) => {
-  return updateAssetStageMutation(gqlClient, assetId);
-}
+// CREATE 
 export const createAuthor = (authorObject) => {
   return createAuthorMutation(gqlClient, authorObject);
 }
+export const createChannel = (slug,description,name,authorEmail) => {
+  return createAuthorMutation(gqlClient, slug,description,name,authorEmail);
+}
+export const uploadVideo = (title,description,thumId,videoLink,slug,channelSlug) => {
+  return uploadVideoMutation(gqlClient, title,description,thumId,videoLink,slug,channelSlug);
+}
+// UPDATE 
 export const updateAuthorStage = (authorId) => {
   return updateAuthorStageMutation(gqlClient, authorId);
 }
-export const uploadVideo = (title,thumId,vidId,channelSlug,videoSlug) => {
-  return uploadVideoMutation(gqlClient, title,thumId,vidId,channelSlug,videoSlug);
+export const updateAssetStage = (assetId) => {
+  return updateAssetStageMutation(gqlClient, assetId);
 }
 export const updateVideoStage = (videoId) => {
   return updateVideoStageMutation(gqlClient, videoId);

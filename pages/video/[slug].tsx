@@ -16,6 +16,7 @@ interface Video {
   description: Object;
   channel: Channel;
   videoLikes: Array<VideoLikes>;
+  videoContent: String;
 }
 interface VideoLikes {
   id: string;

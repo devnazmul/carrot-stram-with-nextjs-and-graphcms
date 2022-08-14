@@ -1,6 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { BiLogOutCircle } from "react-icons/bi";
+import { HiOutlinePlusCircle } from "react-icons/hi";
+import { TbDashboard } from "react-icons/tb";
 
 interface Props {
   user: User;
@@ -55,22 +59,35 @@ const Avater = ({ user }: Props) => {
           <div
             className={`transition-all duration-300 absolute ${
               option ? "top-0" : "-top-96"
-            }  right-0 mt-14 py-5 shadow-lg bg-hovColor rounded-xl h-auto w-40`}
+            }  right-0 mt-14 py-5 shadow-lg bg-hovColor rounded-xl h-auto w-56`}
           >
-            <ul>
-              <li
-                onClick={() => {}}
-                className="hover:bg-orange hover:text-hr cursor-pointer  py-5 text-orange font-bold"
-              >
-                Profile
+            <ul className="flex flex-col justify-start">
+              <li className="hover:bg-orange hover:text-hr cursor-pointer  py-5 text-orange font-bold text-left px-5">
+                <Link href={"/dashboard"}>
+                  <span className="flex justify-start items-center">
+                    <TbDashboard className="mr-2 text-xl" />
+                    Dashboard
+                  </span>
+                </Link>
+              </li>
+              <li className="hover:bg-orange hover:text-hr cursor-pointer  py-5 text-orange font-bold text-left px-5">
+                <Link href={"/createChannel"}>
+                  <span className="flex justify-start items-center">
+                    <HiOutlinePlusCircle className="mr-2 text-xl" />
+                    Create Channel
+                  </span>
+                </Link>
               </li>
               <li
                 onClick={() => {
                   logoutHandler();
                 }}
-                className="hover:bg-orange hover:text-hr cursor-pointer py-5 text-orange font-bold"
+                className="hover:bg-orange hover:text-hr cursor-pointer py-5 text-orange font-bold text-left px-5"
               >
-                Logout
+                <span className="flex justify-start items-center">
+                  <BiLogOutCircle className="mr-2 text-xl" />
+                  Logout
+                </span>
               </li>
             </ul>
           </div>

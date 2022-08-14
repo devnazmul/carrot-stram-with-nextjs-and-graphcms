@@ -1,10 +1,10 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Layout from "../components/Layout/Layout";
 import Main from "../components/Main/Main";
 import { getVideosForHomePage } from "../services";
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const videos = (await getVideosForHomePage()) || [];
   return { props: { videos } };
 };
@@ -31,6 +31,7 @@ export default function Page({ videos }: Props) {
     </div>
   );
 }
+
 Page.getLayout = function getLayout(page: any) {
   return (
     <Layout>

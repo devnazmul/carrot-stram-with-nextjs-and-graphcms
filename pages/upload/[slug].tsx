@@ -38,7 +38,6 @@ function index({ slug }: any) {
       top: 0,
       behavior: "smooth",
     });
-
     data.channelSlug = slug;
     data.slug = genRand(data.title, 10);
 
@@ -46,16 +45,20 @@ function index({ slug }: any) {
     submitVideo(data).then((res: any) => {
       setLoading(false);
       console.log(res);
-      // setTimeout(() => {
-      //   router.push("/");
-      // }, 1000);
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
     });
   };
 
   return (
     <Layout>
       <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
-        <form className="w-full pr-8" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="w-full pr-8"
+          onSubmit={handleSubmit(onSubmit)}
+          acceptCharset={"utf-8"}
+        >
           <h1 className="text-hr text-4xl mb-10 text-center">
             Upload video on{" "}
             <span className="text-orange">{slug.split("-").join(" ")}</span>
