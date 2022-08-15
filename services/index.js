@@ -1,7 +1,8 @@
 import { GraphQLClient } from "graphql-request";
-import { createAuthorMutation } from './mutations/createAuthor/createAuthor';
+import { createChannelMutation } from './mutations/createChannel/createChannel';
 import { updateAssetStageMutation } from './mutations/updateAssetStage/updateAssetStage';
 import { updateAuthorStageMutation } from './mutations/updateAuthorStage/updateAuthorStage';
+import { updateChannelStageMutation } from './mutations/updateChannelStage/updateChannelStage';
 import { updateVideoStageMutation } from './mutations/updateVideoStage/updateVideoStage';
 import { uploadVideoMutation } from './mutations/uploadVideo/uploadVideo';
 import { createUserQuery } from './queries/createUser/createUser';
@@ -23,13 +24,13 @@ const gqlClient = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT, {
 // MUTATIONS ============================================================
 // CREATE 
 export const createAuthor = (authorObject) => {
-  return createAuthorMutation(gqlClient, authorObject);
+  return createChannelMutation(gqlClient, authorObject);
 }
-export const createChannel = (slug,description,name,authorEmail) => {
-  return createAuthorMutation(gqlClient, slug,description,name,authorEmail);
+export const createChannel = (slug, name, authorEmail) => {
+  return createChannelMutation(gqlClient, slug, name, authorEmail);
 }
-export const uploadVideo = (title,description,thumId,videoLink,slug,channelSlug) => {
-  return uploadVideoMutation(gqlClient, title,description,thumId,videoLink,slug,channelSlug);
+export const uploadVideo = (title, description, thumId, videoLink, slug, channelSlug) => {
+  return uploadVideoMutation(gqlClient, title, description, thumId, videoLink, slug, channelSlug);
 }
 // UPDATE 
 export const updateAuthorStage = (authorId) => {
@@ -40,6 +41,9 @@ export const updateAssetStage = (assetId) => {
 }
 export const updateVideoStage = (videoId) => {
   return updateVideoStageMutation(gqlClient, videoId);
+}
+export const updateChannelStage = (slug) => {
+  return updateChannelStageMutation(gqlClient, slug);
 }
 
 // QUERIES ============================================================
