@@ -8,6 +8,7 @@ import { updateVideoStageMutation } from './mutations/updateVideoStage/updateVid
 import { uploadVideoMutation } from './mutations/uploadVideo/uploadVideo';
 import { createUserQuery } from './queries/createUser/createUser';
 import { getOwnVideosQuery } from './queries/getOwnVideos/getOwnVideos';
+import { getOwnVideosQueryBySlug } from './queries/getOwnVideosBySlug/getOwnVideosBySlug';
 import { getPlaylistsQuery } from './queries/getPlaylist/getPlaylist';
 import { getSingleChannelQuery } from './queries/getSingleChannel/getSingleChannel';
 import { getSingleVideoQuery } from './queries/getSingleVideo/getSingleVideo';
@@ -58,6 +59,9 @@ export const getVideosForHomePage = () => {
 }
 export const getOwnVideos = (email) => {
   return getOwnVideosQuery(gqlClient,email)
+}
+export const getOwnVideosBySlug = (slug) => {
+  return getOwnVideosQueryBySlug(gqlClient,slug)
 }
 export const getUserChannel = (email) => {
   return getUserChannelQuery(gqlClient, email)

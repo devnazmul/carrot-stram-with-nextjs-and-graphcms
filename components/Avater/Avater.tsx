@@ -111,7 +111,7 @@ const Avater = ({ user }: Props) => {
                           key={channel.slug}
                           className="hover:bg-orange rounded-xl hover:text-hr cursor-pointer  py-5 text-orange font-bold text-left px-5"
                         >
-                          <Link href={"/createChannel"}>
+                          <Link href={`/channel/${channel.slug}`}>
                             <span className="flex justify-start items-center">
                               <Image
                                 src={

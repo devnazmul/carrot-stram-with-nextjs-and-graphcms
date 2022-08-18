@@ -29,6 +29,7 @@ export default function index() {
         setIsChannelLoading(false);
       });
   }, [user]);
+
   return (
     <Layout>
       <Head>
