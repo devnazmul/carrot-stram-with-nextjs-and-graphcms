@@ -45,11 +45,15 @@ export default function Main({ videos }: Props) {
                 videoSlug={video.slug}
                 thumbnailUrl={video.thumbnail.url}
                 title={video.title}
-                channelName={video.channel.channelName}
-                channelAvater={video.channel.channelLogo.url}
+                channelName={video.channel?.channelName}
+                channelAvater={
+                  video.channel?.channelLogo?.url
+                    ? video.channel.channelLogo.url
+                    : "/src/img/no-image.png"
+                }
                 timeStamp={moment(video.publishedAt).fromNow()}
                 views={video.views.length}
-                slug={video.channel.slug}
+                slug={video.channel?.slug}
               />
             </React.Fragment>
           ))}

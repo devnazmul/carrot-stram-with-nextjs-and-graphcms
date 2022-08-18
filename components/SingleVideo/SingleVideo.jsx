@@ -13,9 +13,10 @@ export default function SingleVideo({ video }) {
 
   return (
     <div className="px-5">
+      <div className="w-9/12 flex justify-center self-center mx-auto mb-10">
       <VideoPlayer thumbnail={thumbnail} url={url} />
-
-      <div className="px-5">
+      </div>
+      <div className="px-5 mt-5">
         <h1 className="xl:text-3xl lg:text-2xl md:text-2xl sm:text-2xl text-xl mt-3 font-medium">
           {video[0].title}
         </h1>

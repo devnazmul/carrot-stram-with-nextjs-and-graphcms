@@ -4,11 +4,7 @@ import { useEffect, useState } from "react";
 import { AiTwotoneLike } from "react-icons/ai";
 import { BiHistory } from "react-icons/bi";
 import { HiHome } from "react-icons/hi";
-import {
-  MdExplore,
-  MdOutlineSlowMotionVideo,
-  MdSubscriptions,
-} from "react-icons/md";
+import { MdExplore, MdSubscriptions, MdWatchLater } from "react-icons/md";
 import { RiPlayList2Fill } from "react-icons/ri";
 import { getUserSubscriptions } from "../../services/index";
 import LoadingComponent from "../Loading/LoadingComponent";
@@ -70,18 +66,18 @@ export default function Aside() {
           />
           {user && (
             <>
-              <NavLink
+              {/* <NavLink
                 href="/ownVideos"
                 Icon={MdOutlineSlowMotionVideo}
                 title="Your Videos"
                 active={false}
-              />
-              {/* <NavLink
+              /> */}
+              <NavLink
                 href="/"
                 Icon={MdWatchLater}
                 title="Watch later"
                 active={false}
-              /> */}
+              />
               <NavLink
                 href="/likedVideos"
                 Icon={AiTwotoneLike}

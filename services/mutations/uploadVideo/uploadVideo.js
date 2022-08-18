@@ -28,5 +28,6 @@ export const uploadVideoMutation = async (gqlClient,title,description,thumId,vid
     `;
     const result = await gqlClient.request(query)
     const authorId = result;
+    console.log(result);
     return authorId;
   }

@@ -52,7 +52,11 @@ export default function index() {
                       <Link key={ch.slug} href={`upload/${ch.slug}`}>
                         <span className="w-full my-2 transition-all hover:translate-x-3 duration-150 hover:bg-orange hover:text-hovColor flex justify-start py-5 px-5 rounded-xl bg-hovColor items-center cursor-pointer">
                           <Image
-                            src={ch.channelLogo.url}
+                            src={
+                              ch.channelLogo?.url
+                                ? ch.channelLogo.url
+                                : "/src/img/no-image.png"
+                            }
                             alt={ch.channelName}
                             width={50}
                             height={50}
