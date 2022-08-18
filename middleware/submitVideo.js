@@ -28,6 +28,13 @@ export const submitVideo = async (obj) => {
         //     const response = await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_API_BEGINNING_POINT}/delete?fileName='${fileName}'`);
         // }
         // POST THUMBNAIL TO HYGRAPH 
+
+
+
+
+
+        // 1
+
         const thumbnailForm = new FormData();
         thumbnailForm.append("fileUpload", obj.thumbnail[0]);
         const thumbnailLink = await fetch(process.env.NEXT_PUBLIC_GRAPHCMS_ASSET_UPLOAD_ENDPOINT, {
@@ -38,6 +45,11 @@ export const submitVideo = async (obj) => {
             body: thumbnailForm,
         }).then(response => { return response.json() })
 
+
+
+
+        // 2
+        
         // Publish Thumbnail
         updateAssetStage(thumbnailLink.id).then((thumId) => {
             if (thumId !== undefined) {
