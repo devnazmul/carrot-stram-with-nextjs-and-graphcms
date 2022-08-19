@@ -1,6 +1,9 @@
 import { GraphQLClient } from "graphql-request";
+import { createAuthorMutation } from './mutations/createAuthor/createAuthor';
 import { createChannelMutation } from './mutations/createChannel/createChannel';
+import { createSubscriptionMutation } from './mutations/createSubscription/createSubscription';
 import { deleteChannelMutation } from './mutations/deleteChannel/deleteChannel';
+import { deleteSubscriptionMutation } from './mutations/deleteSubscription/deleteSubscription';
 import { updateAssetStageMutation } from './mutations/updateAssetStage/updateAssetStage';
 import { updateAuthorStageMutation } from './mutations/updateAuthorStage/updateAuthorStage';
 import { updateChannelStageMutation } from './mutations/updateChannelStage/updateChannelStage';
@@ -11,6 +14,7 @@ import { getOwnVideosQuery } from './queries/getOwnVideos/getOwnVideos';
 import { getOwnVideosQueryBySlug } from './queries/getOwnVideosBySlug/getOwnVideosBySlug';
 import { getPlaylistsQuery } from './queries/getPlaylist/getPlaylist';
 import { getSingleChannelQuery } from './queries/getSingleChannel/getSingleChannel';
+import { getSingleSubscriptionQuery } from './queries/getSingleSubscription/getSingleSubscription';
 import { getSingleVideoQuery } from './queries/getSingleVideo/getSingleVideo';
 import { getUserChannelQuery } from './queries/getUserChannel/getUserChannel';
 import { getUserChannelsQuery } from './queries/getUserChannels/getUserChannels';
@@ -27,7 +31,13 @@ const gqlClient = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT, {
 // MUTATIONS ============================================================
 // CREATE 
 export const createAuthor = (authorObject) => {
-  return createChannelMutation(gqlClient, authorObject);
+  return createAuthorMutation(gqlClient, authorObject);
+}
+export const createSubscription = (channelSlug,authorEmail) => {
+  return createSubscriptionMutation(gqlClient, channelSlug,authorEmail);
+}
+export const deleteSubscription = (channelSlug,authorEmail) => {
+  return deleteSubscriptionMutation(gqlClient, channelSlug,authorEmail);
 }
 export const createChannel = (slug, name, authorEmail) => {
   return createChannelMutation(gqlClient, slug, name, authorEmail);
@@ -56,6 +66,9 @@ export const deleteChannel = (slug) => {
 // QUERIES ============================================================
 export const getVideosForHomePage = () => {
   return getVideosForHomePageQuery(gqlClient)
+}
+export const getSingleSubscription = (channelSlug,authorEmail) => {
+  return getSingleSubscriptionQuery(gqlClient,channelSlug,authorEmail)
 }
 export const getOwnVideos = (email) => {
   return getOwnVideosQuery(gqlClient,email)

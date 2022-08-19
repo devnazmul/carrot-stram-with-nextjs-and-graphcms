@@ -2,10 +2,10 @@
 import { gql } from "graphql-request";
 
 
-export const getUserSubscriptionsQuery = async (gqlClient,userSlug) => {
+export const getUserSubscriptionsQuery = async (gqlClient,email) => {
   const query = gql`
     query getUserSubscriptions {
-      author(where: {slug: "${userSlug}"}) {
+      author(where: {email: "${email}"}) {
         subscriptions {
           channelName
           channelLogo {
