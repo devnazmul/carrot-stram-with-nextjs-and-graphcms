@@ -22,7 +22,10 @@
     "components/Main/Main.tsx",
     "services/index.js",
     "components/Layout/Layout.js",
-    "pages/uploadVideo/index.tsx"
+    "pages/uploadVideo/index.tsx",
+    "components/Aside/Aside.jsx",
+    "components/SingleVideo/SingleVideo.jsx",
+    "pages/channel/[slug].jsx"
   ],
   "exclude": ["node_modules"]
 }
