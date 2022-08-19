@@ -63,69 +63,71 @@ function VideoCard({
     <>
       <div className="cursor-pointer hover:shadow-2xl mb-5 rounded-3xl h-full px-2 sm:w-1/2 md:w-1/2 lg:w-1/3 w-full">
         <Link href={`video/${videoSlug}`}>
-          <span className="block relative w-full overflow-hidden mb-2 rounded">
-            {thumbnailUrl && (
-              <Image
-                loading={"lazy"}
-                alt={channelName}
-                height="720px"
-                width="1280px"
-                className="object-cover object-center w-full h-full block rounded-3xl"
-                src={thumbnailUrl}
-              />
-            )}
-          </span>
-        </Link>
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex">
-            <div className="">
+          <>
+            <span className="block relative w-full overflow-hidden mb-2 rounded">
+              {thumbnailUrl && (
+                <Image
+                  loading={"lazy"}
+                  alt={channelName}
+                  height="720px"
+                  width="1280px"
+                  className="object-cover object-center w-full h-full block rounded-3xl"
+                  src={thumbnailUrl}
+                />
+              )}
+            </span>
+            <div className="flex items-center justify-between mb-5">
               <div className="flex">
-                <Link href={`/video/${slug}`}>
-                  <div title={channelName}>
-                    <Image
-                      className="rounded-full"
-                      loading={"lazy"}
-                      alt={channelName}
-                      src={channelAvater}
-                      height={70}
-                      width={70}
-                    />
-                  </div>
-                </Link>
-                <div className="ml-3">
-                  <Link href={`video/${videoSlug}`}>
-                    <div>
-                      {title && (
-                        <p className="text-gray-100 h-10 title-font text-sm font-medium overflow-hidden">
-                          {title.length > 65
-                            ? title.substring(0, 60) + ` ....`
-                            : title}
-                        </p>
-                      )}
-                      {channelName && (
-                        <h3 className="text-gray-700 text-xs tracking-widest title-font mb-1">
-                          {channelName}
-                        </h3>
-                      )}
+                <div className="">
+                  <div className="flex">
+                    <Link href={`/video/${slug}`}>
+                      <div title={channelName}>
+                        <Image
+                          className="rounded-full"
+                          loading={"lazy"}
+                          alt={channelName}
+                          src={channelAvater}
+                          height={50}
+                          width={50}
+                        />
+                      </div>
+                    </Link>
+                    <div className="ml-3">
+                      <Link href={`video/${videoSlug}`}>
+                        <div>
+                          {title && (
+                            <h1 className="text-gray-100 title-font text-sm font-medium overflow-hidden my-1">
+                              {title.length > 65
+                                ? title.substring(0, 60) + ` ....`
+                                : title}
+                            </h1>
+                          )}
+                          {channelName && (
+                            <p className="text-gray-700 text-xs tracking-widest title-font mb-1">
+                              {channelName}
+                            </p>
+                          )}
+                        </div>
+                      </Link>
+                      <div className="text-xs tracking-widest flex items-center">
+                        {views && views === 0 ? (
+                          <span>0 views</span>
+                        ) : (
+                          <span>{views} views</span>
+                        )}
+                        <BsDot className="text-orange text-3xl" />
+                        {timeStamp && <span>{timeStamp}</span>}
+                      </div>
                     </div>
-                  </Link>
-                  <div className="text-xs tracking-widest flex items-center">
-                    {views && views === 0 ? (
-                      <span>0 views</span>
-                    ) : (
-                      <span>{views} views</span>
-                    )}
-                    <BsDot className="text-orange text-3xl" />
-                    {timeStamp && <span>{timeStamp}</span>}
                   </div>
                 </div>
               </div>
+              <div className="mr-0 cursor-pointer">
+                <BiDotsVerticalRounded className="text-2xl" />
+              </div>
             </div>
-          </div>
-          <div className="mr-0 cursor-pointer">
-            <BiDotsVerticalRounded className="text-2xl" />
-          </div>
-        </div>
+          </>
+        </Link>
       </div>
     </>
   );
