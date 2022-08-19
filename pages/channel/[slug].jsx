@@ -4,9 +4,10 @@ import Head from "next/head";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { AiOutlineCrown } from "react-icons/ai";
-import { BiBell, BiVideo } from "react-icons/bi";
+import { BiVideo } from "react-icons/bi";
 import { BsInfoSquare } from "react-icons/bs";
 import { GiPlatform } from "react-icons/gi";
+import { IoNotifications, IoNotificationsOutline } from "react-icons/io5";
 import { RiPlayList2Line } from "react-icons/ri";
 import Layout from "../../components/Layout/Layout";
 import VideoCard from "../../components/Main/VideoCard/VideoCard";
@@ -14,7 +15,8 @@ import {
   createSubscription,
   deleteSubscription,
   getOwnVideosBySlug,
-  getSingleChannel
+  getSingleChannel,
+  getSingleSubscription
 } from "../../services";
 
 // interface Video {
@@ -56,11 +58,21 @@ export default function channel({ slug }) {
   const [channel, setChannel] = useState();
   const [category, setCategory] = useState("Top");
   const [isSubscribe, setIsSubscribe] = useState(false);
+  const [countSubscribers, setCountSubscribers] = useState(0)
+
   useEffect(() => {
     getSingleChannel(slug).then((ch) => {
       setChannel(ch);
+      setCountSubscribers(ch.subscribers.length)
     });
-  }, [slug]);
+    getSingleSubscription(
+      slug,
+      JSON.parse(localStorage.getItem("UserData"))?.email
+    ).then((response) => {
+      setIsSubscribe(response.subscriptions?.length === 0 ? false : true);
+    });
+  }, [slug,isSubscribe]);
+
 
   const handleSubscribe = (channelSlug, authorEmail) => {
     createSubscription(channelSlug, authorEmail).then((response) => {
@@ -132,11 +144,11 @@ export default function channel({ slug }) {
               <Image
                 className=""
                 src={
-                  channel.channelLogo?.url
-                    ? channel.channelLogo?.url
+                  channel.channelBanner?.url
+                    ? channel.channelBanner?.url
                     : "/src/img/no-image.png"
                 }
-                width={window?.innerWidth}
+                width={innerWidth}
                 height={250}
                 objectFit={"cover"}
                 loading={"lazy"}
@@ -165,39 +177,43 @@ export default function channel({ slug }) {
                             {channel.subscribers.length} subscribers
                           </span>
                         </span>
-                        <button className="ml-10 transition-all duration-150 hover:scale-105 flex items-center border rounded-lg border-orange text-orange font-medium px-3 py-1">
-                          SUBSCRIBE
-                          <BiBell className="ml-3" />
+                        <button
+                          onClick={() => {
+                            !isSubscribe
+                              ? handleSubscribe(
+                                  channel.slug,
+                                  JSON.parse(localStorage.getItem("UserData"))
+                                    ?.email
+                                )
+                              : handleUnsubscribe(
+                                  channel.slug,
+                                  JSON.parse(localStorage.getItem("UserData"))
+                                    ?.email
+                                );
+                          }}
+                          title={!isSubscribe ? "subscribe" : "unsubscribe"}
+                        >
+                          {!isSubscribe ? (
+                            <span className="ml-10 transition-all bg-orange duration-150 hover:scale-105 flex items-center border rounded-lg border-primary text-primary font-medium px-3 py-1">
+                              SUBSCRIBE
+                              <IoNotificationsOutline className="text-primary text-lg ml-3" />
+                            </span>
+                          ) : (
+                            <span className="ml-10 transition-all duration-150 hover:scale-105 flex items-center border rounded-lg border-orange text-orange font-medium px-3 py-1">
+                              UNSUBSCRIBE
+                              <IoNotifications className="text-orange text-lg ml-3" />
+                            </span>
+                          )}
                         </button>
                       </span>
                     </span>
                   </span>
                 </div>
-
-                {/* {channel.videos.map((video) => (
-                  <React.Fragment key={video.slug}>
-                    {console.log("vvvvvvvvvv", video)}
-                    <Link href={`/video/${video.slug}`}>
-                      <Image
-                        src={video.thumbnail.url}
-                        width={236}
-                        height={132}
-                      />
-                    </Link>
-                    <Link href={`/video/${video.slug}`}>
-                      <h2>{video.title}</h2>
-                    </Link>
-                    <span className="flex items-center justify-start">
-                      <h2>{video.views.length}</h2>
-                      <h2>{video.updatedAt}</h2>
-                    </span>
-                  </React.Fragment>
-                ))} */}
               </div>
             </div>
           </>
         )}
-        <div className="w-full pl-24 sm:pl-28 md:pl-40 lg:pl-60 ">
+        <div className="w-full pl-24 sm:pl-28 md:pl-40 lg:pl-60 mt-10">
           <div className="w-auto overflow-x-auto flex justify-between items-center px-5">
             <button
               onClick={() => setCategory("Top")}
