@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiTwotoneLike } from "react-icons/ai";
-import { BiHistory } from "react-icons/bi";
 import { HiHome } from "react-icons/hi";
-import { MdExplore, MdSubscriptions, MdWatchLater } from "react-icons/md";
+import { MdExplore, MdSubscriptions } from "react-icons/md";
 import { RiPlayList2Fill } from "react-icons/ri";
 import { getUserSubscriptions } from "../../services/index";
 import LoadingComponent from "../Loading/LoadingComponent";
@@ -21,6 +21,7 @@ interface ChannelLogo {
 }
 
 export default function Aside() {
+  const [location, setLocation] = useState(useRouter().pathname);
   const [subscriptions, setSubscriptions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<any | null>();
@@ -28,13 +29,15 @@ export default function Aside() {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("UserData") || "false"));
   }, []);
+
   useEffect(() => {
-    user &&
-      getUserSubscriptions(user.slug).then((data) => {
-        setSubscriptions(data);
-        setIsLoading(false);
-      });
-  }, [user]);
+    getUserSubscriptions(
+      JSON.parse(localStorage.getItem("UserData") || "false")?.email
+    ).then((data) => {
+      setSubscriptions(data);
+      setIsLoading(false);
+    });
+  }, []);
 
   return (
     <div className="flex flex-col w-1/6 bg-secondery z-20 fixed rounded-r-3xl py-5 h-full">
@@ -58,12 +61,12 @@ export default function Aside() {
             title="Playlists"
             active={false}
           />
-          <NavLink
+          {/* <NavLink
             href="/history"
             Icon={BiHistory}
             title="History"
             active={false}
-          />
+          /> */}
           {user && (
             <>
               {/* <NavLink
@@ -72,12 +75,12 @@ export default function Aside() {
                 title="Your Videos"
                 active={false}
               /> */}
-              <NavLink
+              {/* <NavLink
                 href="/"
                 Icon={MdWatchLater}
                 title="Watch later"
                 active={false}
-              />
+              /> */}
               <NavLink
                 href="/likedVideos"
                 Icon={AiTwotoneLike}
@@ -93,7 +96,7 @@ export default function Aside() {
           <>
             <div className="">
               <div className="pb-5 pt-3 text-xl font-bold text-hr flex justify-center items-center lg:px-10">
-                <MdSubscriptions className="text-orange block" />
+                <MdSubscriptions className="text-orange lg:hidden block" />
                 <div className="lg:ml-3 font-semibold hidden lg:block lg:text-xl text-white">
                   Subscriptions
                 </div>
@@ -108,11 +111,16 @@ export default function Aside() {
                     <Link key={channel.slug} href={`/channel/${channel.slug}`}>
                       <div className="flex cursor-pointer items-center justify-center lg:justify-start mb-1 hover:bg-hovColor py-2 px-1 xl:px-10">
                         <Image
+                          className="rounded-full"
                           alt={channel.channelName}
                           loading={"lazy"}
                           height="30px"
                           width="30px"
-                          src={channel.channelLogo.url}
+                          src={
+                            channel.channelLogo?.url
+                              ? channel.channelLogo?.url
+                              : "/src/img/no-image.png"
+                          }
                         />
                         <span className="hidden md:block ml-3 text-sm">
                           {" "}
