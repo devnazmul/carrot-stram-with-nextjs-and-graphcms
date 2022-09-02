@@ -8,6 +8,27 @@
 body {
   background-color: #15141b;
 }
+.videoThum {
+  top: 0rem;
+  transition: all 0.5s;
+}
+.videoCard {
+  transition: all 0.5s;
+}
+
+.videoCard:hover .videoThum {
+  top: -1.25rem;
+}
+.channelMenu {
+  border-radius: 1rem;
+  transition: all 0.5s;
+}
+.channelMenu:hover {
+  border-radius: 40% 10% 40% 10%;
+}
+.channelMenu:active {
+  border-radius: 40% 10% 40% 10%;
+}
 .navBarBg {
   background: linear-gradient(
     180deg,

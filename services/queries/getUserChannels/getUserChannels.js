@@ -9,6 +9,9 @@ export const getUserChannelsQuery = async (gqlClient,slug) => {
           channelLogo {
             url(transformation: {image: {resize: {width: 200, height: 200}}})
           }
+          channelBanner {
+            url(transformation: {image: {resize: {height: 300, width: 1200}}})
+          }
           slug
         }
       }

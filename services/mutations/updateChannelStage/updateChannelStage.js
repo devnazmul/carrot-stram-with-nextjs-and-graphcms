@@ -5,10 +5,13 @@ export const updateChannelStageMutation = async (gqlClient,slug) => {
     mutation updateChannelStage {
       publishChannel(where: {slug: "${slug}"}, to: PUBLISHED) {
         slug
+        author {
+          id
+        }
       }
     }
   `;
     const result = await gqlClient.request(query);
-    const channelSlug = result.publishChannel.slug;
-    return channelSlug;
+    const authorID = result.publishChannel.author.id;
+    return authorID;
   }

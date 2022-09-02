@@ -5,15 +5,10 @@ import { gql } from "graphql-request";
 export const getSingleVideoQuery = async (gqlClient, slug) => {
   const query = gql`
   query getVideos {
-    videos(
-      where: {slug: "${slug}"}
-    ) {
-      id
+    videos(where: {slug: "${slug}"}) {
+    id
     title
     publishedAt
-    views {
-      id
-    }
     channel {
       slug
       channelName
@@ -22,13 +17,12 @@ export const getSingleVideoQuery = async (gqlClient, slug) => {
       }
     }
     videoContent
-    videoLikes {
-      id
-    }
     description
     thumbnail {
       url
     }
+    likeCount
+    viewsCount
   }
 }
 

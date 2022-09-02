@@ -33,7 +33,7 @@ export default function index() {
   return (
     <Layout>
       <Head>
-        <title>Upload Video | Carrot Stream</title>
+        <title>Playlist | Carrot Stream</title>
         <meta
           name="description"
           content="In this page you can upload video on your channel"
@@ -50,7 +50,7 @@ export default function index() {
                       Select a channel
                     </h1>
                     {channels.map((ch: any) => (
-                      <Link key={ch.slug} href={`upload/${ch.slug}`}>
+                      <Link key={ch.slug} href={`playlists/${ch.slug}`}>
                         <span className="w-full my-2 transition-all hover:translate-x-3 duration-150 hover:bg-orange hover:text-hovColor flex justify-start py-5 px-5 rounded-xl bg-hovColor items-center cursor-pointer">
                           <Image
                             className="rounded-full"
@@ -69,7 +69,7 @@ export default function index() {
                     ))}
                   </div>
                 ) : (
-                  <div className="pl-24 lg:pl-44 pt-32 lg:pt-44 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center relative">
+                  <div className="pl-24 lg:pl-44 pt-32 lg:pt-44 w-full flex text-lg text-gray-600  font-bold flex-col justify-center items-center relative">
                     <Link href={"/createChannel"}>
                       <span
                         title="Create Channel"
@@ -85,7 +85,7 @@ export default function index() {
                       height={200}
                       loading={"lazy"}
                     />
-                    <h1 className="text-hr text-4xl mb-2 text-center">
+                    <h1 className="text-hr text-4xl mb-1 text-center">
                       You have no channel!
                     </h1>
                     <p className="text-hr text-center font-mono">
@@ -105,13 +105,7 @@ export default function index() {
         )
       ) : (
         <div className="absolute top-1/3 right-0 left-0 mx-auto max-w-max">
-          <div
-            className="animate-spin inline-block w-32 h-32 border-[3px] border-current border-t-transparent text-orange rounded-full"
-            role="status"
-            aria-label="loading"
-          >
-            <span className="sr-only">Loading...</span>
-          </div>
+          Loading.......
         </div>
       )}
     </Layout>

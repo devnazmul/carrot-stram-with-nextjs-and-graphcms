@@ -13,14 +13,18 @@ import { createUserQuery } from './queries/createUser/createUser';
 import { getOwnVideosQuery } from './queries/getOwnVideos/getOwnVideos';
 import { getOwnVideosQueryBySlug } from './queries/getOwnVideosBySlug/getOwnVideosBySlug';
 import { getPlaylistsQuery } from './queries/getPlaylist/getPlaylist';
+import { getPlaylistByChannelSlugQuery } from './queries/getPlaylistByChannelSlug/getPlaylistByChannelSlug';
 import { getSingleChannelQuery } from './queries/getSingleChannel/getSingleChannel';
 import { getSingleSubscriptionQuery } from './queries/getSingleSubscription/getSingleSubscription';
 import { getSingleVideoQuery } from './queries/getSingleVideo/getSingleVideo';
+import { getTopLikedVideoQuery } from './queries/getTopLikedVideo/getTopLikedVideo';
 import { getUserChannelQuery } from './queries/getUserChannel/getUserChannel';
 import { getUserChannelsQuery } from './queries/getUserChannels/getUserChannels';
 import { getUserSubscriptionsQuery } from './queries/getUserSubscriptions/getUserSubscriptions';
 import { getVideosForHomePageQuery } from './queries/getVideosForHomePage/getVideosForHomePage';
 import { isAuthorLoggedInQuery } from './queries/isAuthorLoggedIn/isAuthorLoggedIn';
+
+
 // GRAPHCMS CONFIG ============================================================
 const gqlClient = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT, {
   headers: {
@@ -28,8 +32,11 @@ const gqlClient = new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT, {
   }
 });
 
+
+
+
 // MUTATIONS ============================================================
-// CREATE 
+  // CREATE =============================================================
 export const createAuthor = (authorObject) => {
   return createAuthorMutation(gqlClient, authorObject);
 }
@@ -58,7 +65,7 @@ export const updateVideoStage = (videoId) => {
 export const updateChannelStage = (slug) => {
   return updateChannelStageMutation(gqlClient, slug);
 }
-// DELETE
+  // DELETE ============================================================
 export const deleteChannel = (slug) => {
   return deleteChannelMutation(gqlClient, slug);
 }
@@ -69,6 +76,15 @@ export const getVideosForHomePage = () => {
 }
 export const getSingleSubscription = (channelSlug,authorEmail) => {
   return getSingleSubscriptionQuery(gqlClient,channelSlug,authorEmail)
+}
+export const getPlaylists = () => {
+  return getPlaylistsQuery(gqlClient)
+}
+export const getPlaylistByChannelSlug = (channelSlug) => {
+  return getPlaylistByChannelSlugQuery(gqlClient,channelSlug)
+}
+export const getTopLikedVideo = (channelSlug) => {
+  return getTopLikedVideoQuery(gqlClient,channelSlug)
 }
 export const getOwnVideos = (email) => {
   return getOwnVideosQuery(gqlClient,email)
@@ -82,9 +98,7 @@ export const getUserChannel = (email) => {
 export const getUserSubscriptions = (userSlug) => {
   return getUserSubscriptionsQuery(gqlClient, userSlug)
 }
-export const getPlaylists = () => {
-  return getPlaylistsQuery(gqlClient)
-}
+
 export const getSingleVideo = (videoSlug) => {
   return getSingleVideoQuery(gqlClient, videoSlug);
 }

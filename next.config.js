@@ -5,8 +5,10 @@ module.exports = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  
   images: {
     domains: [
+      'source.unsplash.com',
       'media.graphassets.com',
       'i.ibb.co'
     ],

@@ -11,12 +11,16 @@ import { IoNotifications, IoNotificationsOutline } from "react-icons/io5";
 import { RiPlayList2Line } from "react-icons/ri";
 import Layout from "../../components/Layout/Layout";
 import VideoCard from "../../components/Main/VideoCard/VideoCard";
+import PlaylistCard from "../../components/PlaylistCard/PlaylistCard";
+import StyleButton from "../../components/StyleButton/StyleButton.jsx";
 import {
   createSubscription,
   deleteSubscription,
   getOwnVideosBySlug,
+  getPlaylistByChannelSlug,
   getSingleChannel,
-  getSingleSubscription
+  getSingleSubscription,
+  getTopLikedVideo
 } from "../../services";
 
 // interface Video {
@@ -56,14 +60,15 @@ import {
 export default function channel({ slug }) {
   const [videos, setVideos] = useState([]);
   const [channel, setChannel] = useState();
+  const [playlists, setPlaylists] = useState([]);
   const [category, setCategory] = useState("Top");
   const [isSubscribe, setIsSubscribe] = useState(false);
-  const [countSubscribers, setCountSubscribers] = useState(0)
+  const [countSubscribers, setCountSubscribers] = useState(0);
 
   useEffect(() => {
     getSingleChannel(slug).then((ch) => {
       setChannel(ch);
-      setCountSubscribers(ch.subscribers.length)
+      setCountSubscribers(ch.subscribers.length);
     });
     getSingleSubscription(
       slug,
@@ -71,8 +76,7 @@ export default function channel({ slug }) {
     ).then((response) => {
       setIsSubscribe(response.subscriptions?.length === 0 ? false : true);
     });
-  }, [slug,isSubscribe]);
-
+  }, [slug, isSubscribe]);
 
   const handleSubscribe = (channelSlug, authorEmail) => {
     createSubscription(channelSlug, authorEmail).then((response) => {
@@ -92,7 +96,7 @@ export default function channel({ slug }) {
   useEffect(() => {
     switch (category) {
       case "Top":
-        getOwnVideosBySlug(slug).then((response) => {
+        getTopLikedVideo(slug).then((response) => {
           setVideos(response);
         });
         break;
@@ -102,8 +106,8 @@ export default function channel({ slug }) {
         });
         break;
       case "Playlist":
-        getOwnVideosBySlug(slug).then((response) => {
-          setVideos(response);
+        getPlaylistByChannelSlug(slug).then((response) => {
+          setPlaylists(response);
         });
         break;
       case "About":
@@ -133,145 +137,221 @@ export default function channel({ slug }) {
           content={`In this page your ${slug.split("-").join(" ")} playlist`}
         />
       </Head>
-      <div className="pt-10 h-screen w-full relative">
+      <div className="pl-16 sm:pl-24 md:pl-36 lg:pl-40 xl:pl-44 w-full">
         {!channel ? (
           <div className="absolute top-1/2 right-0 left-72 mx-auto max-w-max">
             <Orbit size={70} speed={1.5} color="#f96c0f" />
           </div>
         ) : (
-          <>
-            <div className="">
+          <div className="relative">
+            <div className="w-full relative h-32 sm:h-48 lg:h-96 mt-5">
               <Image
                 className=""
                 src={
                   channel.channelBanner?.url
                     ? channel.channelBanner?.url
-                    : "/src/img/no-image.png"
+                    : "/src/img/no-Image-channel-banner.png"
                 }
-                width={innerWidth}
-                height={250}
-                objectFit={"cover"}
+                layout="fill"
+                objectFit={"contain"}
                 loading={"lazy"}
               />
-              <div className="pl-16 lg:pl-60">
-                <div className="block h-32">
-                  <span className="relative flex items-start">
-                    <span className=" absolute w-1/2 -top-9 flex items-start">
-                      <Image
-                        className="shadow-lg rounded-full"
-                        src={
-                          channel.channelLogo?.url
-                            ? channel.channelLogo?.url
-                            : "/src/img/no-image.png"
-                        }
-                        width={150}
-                        height={150}
-                        loading={"lazy"}
-                      />
-                      <span className="flex justify-between items-center pt-5 ml-5">
-                        <span>
-                          <h1 className="text-white font-semibold text-3xl pt-5 ">
-                            {channel.channelName}
-                          </h1>
-                          <span className="text-hr">
-                            {channel.subscribers.length} subscribers
-                          </span>
-                        </span>
-                        <button
-                          onClick={() => {
-                            !isSubscribe
-                              ? handleSubscribe(
-                                  channel.slug,
-                                  JSON.parse(localStorage.getItem("UserData"))
-                                    ?.email
-                                )
-                              : handleUnsubscribe(
-                                  channel.slug,
-                                  JSON.parse(localStorage.getItem("UserData"))
-                                    ?.email
-                                );
-                          }}
-                          title={!isSubscribe ? "subscribe" : "unsubscribe"}
-                        >
-                          {!isSubscribe ? (
-                            <span className="ml-10 transition-all bg-orange duration-150 hover:scale-105 flex items-center border rounded-lg border-primary text-primary font-medium px-3 py-1">
-                              SUBSCRIBE
-                              <IoNotificationsOutline className="text-primary text-lg ml-3" />
-                            </span>
-                          ) : (
-                            <span className="ml-10 transition-all duration-150 hover:scale-105 flex items-center border rounded-lg border-orange text-orange font-medium px-3 py-1">
-                              UNSUBSCRIBE
-                              <IoNotifications className="text-orange text-lg ml-3" />
-                            </span>
-                          )}
-                        </button>
+            </div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2">
+              <div className="block">
+                <span className="md:mt-10 items-center flex justify-center flex-col">
+                  <span className="md:hidden block mb-2">
+                    <Image
+                      className="block rounded-full"
+                      src={
+                        channel.channelLogo?.url
+                          ? channel.channelLogo?.url
+                          : "/src/img/no-image.png"
+                      }
+                      width={70}
+                      height={70}
+                      loading={"lazy"}
+                    />
+                  </span>
+                  <span className="hidden md:block lg:hidden mb-2">
+                    <Image
+                      className="shadow-lg rounded-full"
+                      src={
+                        channel.channelLogo?.url
+                          ? channel.channelLogo?.url
+                          : "/src/img/no-image.png"
+                      }
+                      width={100}
+                      height={100}
+                      loading={"lazy"}
+                    />
+                  </span>
+                  <span className="hidden lg:block mb-1">
+                    <Image
+                      className="shadow-lg rounded-full"
+                      src={
+                        channel.channelLogo?.url
+                          ? channel.channelLogo?.url
+                          : "/src/img/no-image.png"
+                      }
+                      width={150}
+                      height={150}
+                      loading={"lazy"}
+                    />
+                  </span>
+                  <span className="flex justify-between flex-col items-center lg:pt-1">
+                    <span className="flex flex-col items-center justify-center">
+                      <h1 className="text-white font-semibold text-xl -mt-2 lg:text-3xl lg:pt-5 ">
+                        {channel.channelName}
+                      </h1>
+                      <span className="text-hr">
+                        {channel.subscribers.length} subscribers
                       </span>
                     </span>
+                    <button
+                      className="mt-3"
+                      onClick={() => {
+                        !isSubscribe
+                          ? handleSubscribe(
+                              channel.slug,
+                              JSON.parse(localStorage.getItem("UserData"))
+                                ?.email
+                            )
+                          : handleUnsubscribe(
+                              channel.slug,
+                              JSON.parse(localStorage.getItem("UserData"))
+                                ?.email
+                            );
+                      }}
+                      title={!isSubscribe ? "subscribe" : "unsubscribe"}
+                    >
+                      {!isSubscribe ? (
+                        <span className="transition-all bg-orange duration-150 hover:scale-105 flex items-center border rounded-lg border-primary text-primary font-medium px-3 py-1 text-sm">
+                          SUBSCRIBE
+                          <IoNotificationsOutline className="ml-2 text-primary text-lg" />
+                        </span>
+                      ) : (
+                        <span className="transition-all duration-150 hover:scale-105 flex items-center border rounded-lg border-hr text-hr font-medium px-3 py-1 text-sm">
+                          UNSUBSCRIBE
+                          <IoNotifications className="ml-2 text-hr text-lg" />
+                        </span>
+                      )}
+                    </button>
                   </span>
-                </div>
+                </span>
               </div>
             </div>
-          </>
+          </div>
         )}
-        <div className="w-full pl-24 sm:pl-28 md:pl-40 lg:pl-60 mt-10">
-          <div className="w-auto overflow-x-auto flex justify-between items-center px-5">
-            <button
-              onClick={() => setCategory("Top")}
-              className="transition-all hover:scale-x-110 bg-gradient-to-tr from-orange  to-yellow-400 w-36 h-36 flex justify-center items-center text-xl font-bold text-white rounded-2xl shadow-lg flex-col"
-            >
-              <AiOutlineCrown className="text-5xl justify-between mb-3 " /> Top
+        <div className="w-full mt-36 md:mt-44 lg:mt-44 lg:pl-3 xl:pl-8">
+          <div className="w-auto overflow-x-auto flex justify-between items-center px-5 md:px-6">
+            <button title="Top" onClick={() => setCategory("Top")}>
+              <StyleButton
+                Icon={AiOutlineCrown}
+                Title={"Top"}
+                Color={"from-orange  to-yellow-400"}
+              />
             </button>
-            <button
-              onClick={() => setCategory("Videos")}
-              className="transition-all hover:scale-x-110 bg-gradient-to-tr from-red-500  to-pink-400 w-36 h-36 flex justify-center items-center text-xl font-bold text-white rounded-2xl shadow-lg flex-col"
-            >
-              <BiVideo className="text-5xl justify-between mb-3 " /> Videos
+            <button title="Videos" onClick={() => setCategory("Videos")}>
+              <StyleButton
+                Icon={BiVideo}
+                Title={"Videos"}
+                Color={"from-purple-500  to-blue-400"}
+              />
             </button>
-            <button
-              onClick={() => setCategory("Playlist")}
-              className="transition-all hover:scale-x-110 bg-gradient-to-tr from-purple-500  to-blue-400 w-36 h-36 flex justify-center items-center text-xl font-bold text-white rounded-2xl shadow-lg flex-col"
-            >
-              <RiPlayList2Line className="text-5xl justify-between mb-3 " />{" "}
-              Playlist
+            <button title="Playlist" onClick={() => setCategory("Playlist")}>
+              <StyleButton
+                Icon={RiPlayList2Line}
+                Title={"Playlist"}
+                Color={"from-purple-500  to-blue-400"}
+              />
             </button>
-            <button
-              onClick={() => setCategory("About")}
-              className="transition-all hover:scale-x-110 bg-gradient-to-tr from-orange  to-red-400 w-36 h-36 flex justify-center items-center text-xl font-bold text-white rounded-2xl shadow-lg flex-col"
-            >
-              <BsInfoSquare className="text-5xl justify-between mb-3 " /> About
+            <button title="About" onClick={() => setCategory("About")}>
+              <StyleButton
+                Icon={BsInfoSquare}
+                Title={"About"}
+                Color={"from-orange  to-red-400"}
+              />
             </button>
-            <button
-              onClick={() => setCategory("Channels")}
-              className="transition-all hover:scale-x-110 bg-gradient-to-tr from-lime-400  to-green-400 w-36 h-36 flex justify-center items-center text-xl font-bold text-white rounded-2xl shadow-lg flex-col"
-            >
-              <GiPlatform className="text-5xl justify-between mb-3 " />
-              Channels
+            <button title="Channels" onClick={() => setCategory("Channels")}>
+              <StyleButton
+                Icon={GiPlatform}
+                Title={"Channels"}
+                Color={"from-lime-400  to-green-400"}
+              />
             </button>
           </div>
           <div className="text-gray-600 body-font bg-transparent mt-0">
-            <h1 className="font-bold text-3xl ml-5 my-10">{category}</h1>
-            <div className="container px-5 py-0 mx-auto">
-              <div className="flex flex-wrap -m-3">
-                {videos?.map((video) => (
-                  <React.Fragment key={video.id}>
-                    <VideoCard
-                      videoSlug={video.slug}
-                      thumbnailUrl={video.thumbnail.url}
-                      title={video.title}
-                      channelName={video.channel?.channelName}
-                      channelAvater={
-                        video.channel?.channelLogo?.url
-                          ? video.channel.channelLogo.url
-                          : "/src/img/no-image.png"
-                      }
-                      timeStamp={moment(video.publishedAt).fromNow()}
-                      views={video.views.length}
-                      slug={video.channel?.slug}
-                    />
-                  </React.Fragment>
-                ))}
+            <h1 className="font-bold text-xl lg:text-3xl lg:ml-5 mt-9 text-center mb-16 lg:my-10">
+              {category}
+            </h1>
+            {(category === "Top" || category === "Videos") && (
+              <div className="container px-5 py-0 mx-auto">
+                <div className="flex flex-wrap -m-3">
+                  {videos?.map((video) => (
+                    <React.Fragment key={video.id}>
+                      <VideoCard
+                        videoSlug={video.slug}
+                        thumbnailUrl={video.thumbnail.url}
+                        title={video.title}
+                        channelName={video.channel?.channelName}
+                        channelAvater={
+                          video.channel?.channelLogo?.url
+                            ? video.channel.channelLogo.url
+                            : "/src/img/no-image.png"
+                        }
+                        timeStamp={moment(video.publishedAt).fromNow()}
+                        views={video.viewsCount}
+                      />
+                    </React.Fragment>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
+            {category === "Playlist" && (
+              <>
+                {playlists ? (
+                  <>
+                    {playlists.length !== 0 ? (
+                      <div className="container px-5 py-0 mx-auto">
+                        <div className="flex flex-wrap -m-3">
+                          {playlists?.map((playlist) => (
+                            <React.Fragment key={playlist.id}>
+                              <div>
+                                <PlaylistCard playlistData={playlist} />
+                              </div>
+                            </React.Fragment>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="w-full text-gray-600 font-bold">
+                        <div className="flex flex-col justify-center items-center mx-auto pb-14">
+                          <Image
+                            alt={"not_found"}
+                            loading={"lazy"}
+                            src={"/src/img/not-found.png"}
+                            width="200px"
+                            height="200px"
+                          />
+                          <span className=" text-2xl">No playlist found!</span>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <>
+                  <div
+                className="animate-spin inline-block w-32 h-32 border-[3px] border-current border-t-transparent text-orange rounded-full"
+                role="status"
+                aria-label="loading"
+              >
+                <span className="sr-only">Loading...</span>
+              </div>
+                  </>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Layout from "../../components/Layout/Layout";
 import {
   createChannel,
   deleteChannel,
+  updateAuthorStage,
   updateChannelStage,
 } from "../../services";
 import { genarateRandomSlug } from "../../services/genarateRandomSlug";
@@ -14,17 +15,11 @@ type Inputs = {
   exampleRequired: string;
 };
 
-interface MutationObject {
-  status: string;
-  data: string;
-  message: string;
-}
 function index() {
   const [error, setError] = useState<Object | null>();
   const [userEmail, setUserEmail] = useState<string>();
   const [loading, setLoading] = useState(false);
-  const [thumbnail, setThumbnail] = useState<string | null>();
-  const [mutation, setMutation] = useState<MutationObject | null>();
+  const [authSlug, setAuthSlug] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -41,8 +36,6 @@ function index() {
 
   const onSubmit = (data: any) => {
     setError(errors);
-    console.log(errors);
-
     // set loading true and scroll to top
     setLoading(true);
     window.scrollTo({
@@ -52,25 +45,21 @@ function index() {
     data.slug = genarateRandomSlug(data.channelName, 10);
 
     createChannel(data.slug, data.channelName, data.authEmail).then((res) => {
-      console.log(res);
-
       updateChannelStage(res)
-        .then((updateResult) => {
-          console.log(updateResult);
-          setMutation({
-            status: "publish",
-            data: updateResult,
-            message: `published channel ${updateResult}`,
-          });
+        .then((authID) => {
+          if (authID) {
+            updateAuthorStage(authID).then((auth) => {
+              if (auth) {
+                // setLoading(false);
+                router.push(`/channel/${data.slug}`);
+              }
+            });
+          }
         })
         .catch((err) => {
           if (err) {
             deleteChannel(data.slug).then((deleteResult) => {
-              setMutation({
-                status: "delete",
-                data: deleteResult,
-                message: `deleted channel ${deleteResult}`,
-              });
+              setLoading(false);
             });
           }
         });
@@ -80,9 +69,18 @@ function index() {
   return (
     <Layout>
       {userEmail !== undefined && (
-        <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
-          {(mutation?.status === "publish" || mutation?.status === "delete") &&
-            alert(mutation.message)}
+        <div className="relative pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 h-full w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
+          {loading && (
+            <div className="absolute flex justify-center items-center bg-black w-1/2 h-full bg-opacity-50 rounded-xl">
+              <div
+                className="animate-spin inline-block w-32 h-32 border-[3px] border-current border-t-transparent text-orange rounded-full"
+                role="status"
+                aria-label="loading"
+              >
+                <span className="sr-only">Loading...</span>
+              </div>
+            </div>
+          )}
           {
             <form
               className={`w-full flex-col justify-center items-center px-60 ${

@@ -152,7 +152,13 @@ function index({ slug }: any) {
         </div>
       ) : (
         <div className="w-full mx-auto h-screen flex justify-center items-center pl-24 sm:pl-28 md:pl-40 lg:pl-60 mt-10">
-          <h1 className="text-4xl text-hr font-semibold">Uploading...</h1>
+          <div
+            className="animate-spin inline-block w-32 h-32 border-[3px] border-current border-t-transparent text-orange rounded-full"
+            role="status"
+            aria-label="loading"
+          >
+            <span className="sr-only">Loading...</span>
+          </div>
         </div>
       )}
     </Layout>

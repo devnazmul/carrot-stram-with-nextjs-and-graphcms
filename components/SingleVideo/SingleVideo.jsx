@@ -14,9 +14,10 @@ import {
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 export default function SingleVideo({ video }) {
+  console.log(video);
   const thumbnail = video[0].thumbnail.url;
   const url = video[0].videoContent;
-  const views = video[0].views.length;
+  const views = video[0].viewsCount;
   const slug = video[0].channel.slug;
   const timeStamp = moment(video[0].publishedAt).format("DD MMM , YYYY");
 
@@ -27,7 +28,6 @@ export default function SingleVideo({ video }) {
       slug,
       JSON.parse(localStorage.getItem("UserData"))?.email
     ).then((response) => {
-
       setIsSubscribe(response.subscriptions?.length === 0 ? false : true);
     });
   }, [video]);
@@ -116,19 +116,19 @@ export default function SingleVideo({ video }) {
             <button className="flex text-green-500 justify-center items-center">
               <BiLike />{" "}
               <span className="ml-2 text-xs block bg-secondery rounded-full px-3 py-0.5">
-                {video[0].videoLikes.length}
+                {video[0].likeCount}
               </span>
             </button>
             <button className="ml-5 flex  text-red-500 justify-center items-center">
               <BiDislike />
               <span className="ml-2 text-xs block bg-secondery rounded-full px-3 py-0.5">
-                {video[0].videoLikes.length}
+                {video[0].likeCount}
               </span>
             </button>
             <button className="ml-5 flex text-yellow-500 justify-center items-center">
               <BiCommentDetail />{" "}
               <span className="ml-2 text-xs block bg-secondery rounded-full px-3 py-0.5">
-                {video[0].videoLikes.length}
+                {video[0].likeCount}
               </span>
             </button>
             <button className="ml-5 text-purple-500 flex float-right justify-center items-center">

@@ -31,13 +31,14 @@ export default function Aside() {
   }, []);
 
   useEffect(() => {
-    getUserSubscriptions(
-      JSON.parse(localStorage.getItem("UserData") || "false")?.email
-    ).then((data) => {
-      setSubscriptions(data);
-      setIsLoading(false);
-    });
-  }, []);
+    user &&
+      getUserSubscriptions(
+        JSON.parse(localStorage.getItem("UserData") || "false")?.email
+      ).then((data) => {
+        setSubscriptions(data);
+        setIsLoading(false);
+      });
+  }, [user]);
 
   return (
     <div className="flex flex-col w-1/6 bg-secondery z-20 fixed rounded-r-3xl py-5 h-full">
@@ -56,7 +57,7 @@ export default function Aside() {
 
         <div className="">
           <NavLink
-            href="/playlists"
+            href="/playlist-page"
             Icon={RiPlayList2Fill}
             title="Playlists"
             active={false}

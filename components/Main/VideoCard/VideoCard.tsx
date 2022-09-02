@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
 
@@ -57,82 +57,75 @@ function VideoCard({
   timeStamp,
   views,
   channelAvater,
-  slug,
 }: Props) {
+  const router = useRouter();
   return (
-    <>
-      <div className="cursor-pointer hover:shadow-2xl mb-5 rounded-3xl h-full px-2 sm:w-1/2 md:w-1/2 lg:w-1/3 w-full">
-        <Link href={`video/${videoSlug}`}>
-          <>
-            <span className="block relative w-full overflow-hidden mb-2 rounded">
-              {thumbnailUrl && (
+    <div
+      onClick={() => router.push(`/video/${videoSlug}`)}
+      className="videoCard cursor-pointer bg-secondery relative mb-10 rounded-3xl h-full px-2 sm:w-1/2 md:w-1/2 lg:w-1/3 w-full"
+    >
+      <span className="block relative w-full  videoThum overflow-hidden mb-1 rounded">
+        {thumbnailUrl && (
+          <Image
+            loading={"lazy"}
+            alt={channelName}
+            height="720px"
+            width="1280px"
+            className="object-cover object-center w-full h-full block rounded-3xl"
+            src={thumbnailUrl}
+          />
+        )}
+      </span>
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex">
+          <div className="">
+            <div className="flex">
+              <div title={channelName}>
                 <Image
+                  className="rounded-full"
                   loading={"lazy"}
                   alt={channelName}
-                  height="720px"
-                  width="1280px"
-                  className="object-cover object-center w-full h-full block rounded-3xl"
-                  src={thumbnailUrl}
+                  src={channelAvater}
+                  height={50}
+                  width={50}
                 />
-              )}
-            </span>
-            <div className="flex items-center justify-between mb-5">
-              <div className="flex">
-                <div className="">
-                  <div className="flex">
-                    <Link href={`/video/${slug}`}>
-                      <div title={channelName}>
-                        <Image
-                          className="rounded-full"
-                          loading={"lazy"}
-                          alt={channelName}
-                          src={channelAvater}
-                          height={50}
-                          width={50}
-                        />
-                      </div>
-                    </Link>
-                    <div className="ml-3">
-                      <Link href={`video/${videoSlug}`}>
-                        <div>
-                          {title && (
-                            <h1 className="text-gray-100 title-font text-sm font-medium overflow-hidden my-1">
-                              {title.length > 65
-                                ? title.substring(0, 60) + ` ....`
-                                : title}
-                            </h1>
-                          )}
-                          {channelName && (
-                            <p className="text-gray-700 text-xs tracking-widest title-font mb-1">
-                              {channelName}
-                            </p>
-                          )}
-                        </div>
-                      </Link>
-                      <div className="text-xs tracking-widest flex items-center">
-                        {views && views === 0 ? (
-                          <span>0 views</span>
-                        ) : (
-                          <span>{views} views</span>
-                        )}
-                        <BsDot className="text-orange text-3xl" />
-                        {timeStamp && <span>{timeStamp}</span>}
-                      </div>
-                    </div>
-                  </div>
+              </div>
+
+              <div className="ml-3">
+                <div>
+                  {title && (
+                    <h1 className="text-gray-100 title-font text-sm font-medium overflow-hidden my-1">
+                      {title.length > 65
+                        ? title.substring(0, 60) + ` ....`
+                        : title}
+                    </h1>
+                  )}
+                  {channelName && (
+                    <p className="text-gray-700 text-xs tracking-widest title-font mb-1">
+                      {channelName}
+                    </p>
+                  )}
+                </div>
+
+                <div className="text-xs tracking-widest flex items-center">
+                  {views && views === 0 ? (
+                    <span>0 views</span>
+                  ) : (
+                    <span>{views} views</span>
+                  )}
+                  <BsDot className="text-orange text-3xl" />
+                  {timeStamp && <span>{timeStamp}</span>}
                 </div>
               </div>
-              <div className="mr-0 cursor-pointer">
-                <BiDotsVerticalRounded className="text-2xl" />
-              </div>
             </div>
-          </>
-        </Link>
+          </div>
+        </div>
+        <div className="mr-0 cursor-pointer">
+          <BiDotsVerticalRounded className="text-2xl" />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
-
-VideoCard.propTypes = {};
 
 export default VideoCard;

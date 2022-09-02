@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { FiLogIn } from "react-icons/fi";
-import { IoNotificationsSharp } from "react-icons/io5";
 import { MdCloudUpload } from "react-icons/md";
 import Avater from "../../Avater/Avater";
 
@@ -61,13 +60,13 @@ const Navbar = () => {
                     <span className="hidden lg:block">Upload Video</span>
                   </div>
                 </Link>
-                <div
+                {/* <div
                   title="notification"
                   className="cursor-pointer  hover:scale-105 transition-all duration-150 hover:shadow-md relative mr-3 md:mr-5"
                 >
                   <span className="absolute w-3 h-3 -top-1 -right-1 rounded-full border border-hr bg-orange"></span>
                   <IoNotificationsSharp className="text-2xl lg:text-xl text-hr" />
-                </div>
+                </div> */}
                 {user && <Avater user={user} />}
               </>
             )}

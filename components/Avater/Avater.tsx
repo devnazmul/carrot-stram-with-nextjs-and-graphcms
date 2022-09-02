@@ -48,7 +48,7 @@ const Avater = ({ user }: Props) => {
         setChannels(res.channels);
       }
     });
-  }, [channels]);
+  }, []);
 
   return (
     <>

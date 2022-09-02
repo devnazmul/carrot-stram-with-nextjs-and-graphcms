@@ -16,6 +16,7 @@ interface Video {
   views: Array<Int16Array>;
   videoContent: object;
   thumbnail: Thumbnail;
+  viewsCount: number;
 }
 interface Thumbnail {
   url: string;
@@ -52,8 +53,7 @@ export default function Main({ videos }: Props) {
                     : "/src/img/no-image.png"
                 }
                 timeStamp={moment(video.publishedAt).fromNow()}
-                views={video.views.length}
-                slug={video.channel?.slug}
+                views={video.viewsCount}
               />
             </React.Fragment>
           ))}
