@@ -3,16 +3,16 @@ import { useRouter } from "next/router";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
 
-// interface Props {
-//   videoSlug: string;
-//   thumbnailUrl: string;
-//   title: string;
-//   channelName: string;
-//   timeStamp: string;
-//   views: number;
-//   channelAvater: string;
-//   slug: string;
-// }
+interface Props {
+  videoSlug: string;
+  thumbnailUrl: string;
+  title: string;
+  channelName: string;
+  timeStamp: string;
+  views: number;
+  channelAvater: string;
+  slug: string;
+}
 
 // function get_time_diff(datetime: string) {
 //   var datetime =
@@ -57,7 +57,7 @@ function VideoCard({
   timeStamp,
   views,
   channelAvater,
-}) {
+}: Props) {
   const router = useRouter();
   return (
     <div

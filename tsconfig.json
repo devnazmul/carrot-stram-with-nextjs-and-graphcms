@@ -25,7 +25,8 @@
     "pages/uploadVideo/index.tsx",
     "components/Aside/Aside.jsx",
     "components/SingleVideo/SingleVideo.jsx",
-    "pages/channel/[slug].jsx"
+    "pages/channel/[slug].jsx",
+    "components/Main/VideoCard/VideoCard.jsx"
   ],
   "exclude": ["node_modules"]
 }
