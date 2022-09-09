@@ -11,7 +11,6 @@ interface Props {
   timeStamp: string;
   views: number;
   channelAvater: string;
-  slug: string;
 }
 
 // function get_time_diff(datetime: string) {
