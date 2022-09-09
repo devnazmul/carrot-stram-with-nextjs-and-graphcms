@@ -7,7 +7,7 @@ import Layout from "../../components/Layout/Layout";
 import Playlist from "../../components/Playlist/Playlist";
 import { getPlaylistByChannelSlug } from "../../services";
 import { generateGrad } from "../../services/genarateGrad";
-
+import styles from "./Playlists.module.css";
 export const getServerSideProps: GetServerSideProps = async (contex) => {
   const playlists =
     (await getPlaylistByChannelSlug(contex?.params?.slug)) || [];
@@ -41,7 +41,7 @@ export default function index({ playlists }: Props) {
       {user && playlists ? (
         <>
           {!user ? (
-            <div className="relative pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 h-screen w-full flex  text-gray-600 font-bold flex-col  justify-center items-center">
+            <div className={styles.loginContainer}>
               <Image
                 alt={"not_found"}
                 loading={"lazy"}
@@ -62,8 +62,8 @@ export default function index({ playlists }: Props) {
           ) : (
             <>
               {playlists.length !== 0 ? (
-                <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 h-screen w-full flex justify-center">
-                  <div className="w-full flex flex-col pr-12">
+                <div className={styles.playlistContainer}>
+                  <div className={styles.playlistCard}>
                     {playlists.map((playlist: Playlist) => (
                       <React.Fragment key={playlist.id}>
                         <Playlist
@@ -76,7 +76,7 @@ export default function index({ playlists }: Props) {
                   </div>
                 </div>
               ) : (
-                <div className="w-full flex flex-col  text-gray-600 font-bold  justify-center items-center pl-24 sm:pl-32 md:pl-40 lg:pl-52 xl:pl-56 pt-28 h-full">
+                <div className={styles.notFoundContainer}>
                   <Image
                     alt={"not_found"}
                     loading={"lazy"}

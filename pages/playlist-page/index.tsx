@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import Layout from "../../components/Layout/Layout";
 import { getUserChannels } from "../../services";
-
+import styles from "./PlaylistPage.module.css";
 type Inputs = {
   example: string;
   exampleRequired: string;
@@ -45,13 +45,11 @@ export default function index() {
             {!isChannelLoading && (
               <>
                 {channels.length > 0 ? (
-                  <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 mr-10 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
-                    <h1 className="text-orange text-2xl mb-5">
-                      Select a channel
-                    </h1>
+                  <div className={styles.container}>
+                    <h1 className={styles.h1}>Select a channel</h1>
                     {channels.map((ch: any) => (
                       <Link key={ch.slug} href={`playlists/${ch.slug}`}>
-                        <span className="w-full my-2 transition-all hover:translate-x-3 duration-150 hover:bg-orange hover:text-hovColor flex justify-start py-5 px-5 rounded-xl bg-hovColor items-center cursor-pointer">
+                        <span className={styles.playlistContainer}>
                           <Image
                             className="rounded-full"
                             src={
@@ -69,11 +67,11 @@ export default function index() {
                     ))}
                   </div>
                 ) : (
-                  <div className="pl-24 lg:pl-44 pt-32 lg:pt-44 w-full flex text-lg text-gray-600  font-bold flex-col justify-center items-center relative">
+                  <div className={styles.createChannelContainer}>
                     <Link href={"/createChannel"}>
                       <span
                         title="Create Channel"
-                        className="transition-all hover:scale-105 duration-150 absolute right-5 md:right-10 top-28 cursor-pointer bg-orange rounded-full px-3 py-3 md:px-5 md:py-3 flex justify-center items-center text-hovColor"
+                        className={styles.createChannelWrapper}
                       >
                         <BiPlus className="text-2xl" />
                         <span className="md:block hidden"> Create channel</span>
@@ -97,9 +95,9 @@ export default function index() {
             )}
           </>
         ) : (
-          <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 mr-10 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
-            <h1 className="text-orange text-2xl mb-5">
-              Please log in for uploading video.
+          <div className="pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 mr-10 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center h-screen">
+            <h1 className="text-orange text-2xl mb-32">
+              Please log in for creating playlist.
             </h1>
           </div>
         )

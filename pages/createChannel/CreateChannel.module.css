@@ -1,0 +1,24 @@
+.container {
+  @apply relative pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 h-full w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center;
+}
+.loadingContainer {
+  @apply absolute flex justify-center items-center bg-black w-1/2 h-full bg-opacity-50 rounded-xl;
+}
+.loadingSpinner {
+  @apply animate-spin inline-block w-32 h-32 border-[3px] border-current border-t-transparent text-orange rounded-full;
+}
+.form {
+  @apply w-full flex-col justify-center items-center px-60;
+}
+.h1 {
+  @apply text-hr text-4xl mb-10 text-center;
+}
+.channelNameInput {
+  @apply rounded-lg px-5 py-5 w-full mb-5 bg-hr text-orange;
+}
+.emailInput {
+  @apply rounded-lg px-5 py-5 w-full mb-5 bg-hr text-orange hidden;
+}
+.submitBtn {
+  @apply rounded-lg px-5 py-5 w-full mb-5 text-hr font-semibold cursor-pointer bg-orange;
+}

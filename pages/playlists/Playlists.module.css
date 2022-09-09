@@ -1,0 +1,12 @@
+.loginContainer {
+  @apply relative pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 h-screen w-full flex  text-gray-600 font-bold flex-col  justify-center items-center;
+}
+.playlistContainer {
+  @apply pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 h-screen w-full flex justify-center;
+}
+.playlistCard {
+  @apply w-full flex flex-col pr-12;
+}
+.notFoundContainer {
+  @apply w-full flex flex-col  text-gray-600 font-bold  justify-center items-center pl-24 sm:pl-32 md:pl-40 lg:pl-52 xl:pl-56 pt-28 h-full;
+}

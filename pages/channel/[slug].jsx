@@ -23,6 +23,8 @@ import {
   getTopLikedVideo
 } from "../../services";
 
+
+import styles from './Channel.module.css';
 // interface Video {
 //   publishedAt: string;
 //   channel: Channel;
@@ -77,7 +79,6 @@ export default function channel({ slug }) {
       setIsSubscribe(response.subscriptions?.length === 0 ? false : true);
     });
   }, [slug, isSubscribe]);
-
   const handleSubscribe = (channelSlug, authorEmail) => {
     createSubscription(channelSlug, authorEmail).then((response) => {
       if (response) {
@@ -92,7 +93,6 @@ export default function channel({ slug }) {
       }
     });
   };
-
   useEffect(() => {
     switch (category) {
       case "Top":
@@ -137,9 +137,9 @@ export default function channel({ slug }) {
           content={`In this page your ${slug.split("-").join(" ")} playlist`}
         />
       </Head>
-      <div className="pl-16 sm:pl-24 md:pl-36 lg:pl-40 xl:pl-44 w-full">
+      <div className={styles.container}>
         {!channel ? (
-          <div className="absolute top-1/2 right-0 left-72 mx-auto max-w-max">
+          <div className={styles.loader}>
             <Orbit size={70} speed={1.5} color="#f96c0f" />
           </div>
         ) : (
@@ -243,8 +243,8 @@ export default function channel({ slug }) {
             </div>
           </div>
         )}
-        <div className="w-full mt-36 md:mt-44 lg:mt-44 lg:pl-3 xl:pl-8">
-          <div className="w-auto overflow-x-auto flex justify-between items-center px-5 md:px-6">
+        <div className={styles.contentContainer}>
+          <div className={styles.btnContainer}>
             <button title="Top" onClick={() => setCategory("Top")}>
               <StyleButton
                 Icon={AiOutlineCrown}
@@ -281,13 +281,13 @@ export default function channel({ slug }) {
               />
             </button>
           </div>
-          <div className="text-gray-600 body-font bg-transparent mt-0">
-            <h1 className="font-bold text-xl lg:text-3xl lg:ml-5 mt-9 text-center mb-16 lg:my-10">
+          <div className={styles.categoryVideoContainer}>
+            <h1 className={styles.category}>
               {category}
             </h1>
             {(category === "Top" || category === "Videos") && (
-              <div className="container px-5 py-0 mx-auto">
-                <div className="flex flex-wrap -m-3">
+              <div className={`container pl-8 pr-4 py-0 mx-auto`}>
+                <div className={styles.videoCard}>
                   {videos?.map((video) => (
                     <React.Fragment key={video.id}>
                       <VideoCard
@@ -308,6 +308,7 @@ export default function channel({ slug }) {
                 </div>
               </div>
             )}
+            
             {category === "Playlist" && (
               <>
                 {playlists ? (
@@ -342,7 +343,7 @@ export default function channel({ slug }) {
                 ) : (
                   <>
                   <div
-                className="animate-spin inline-block w-32 h-32 border-[3px] border-current border-t-transparent text-orange rounded-full"
+                className={styles.spinner}
                 role="status"
                 aria-label="loading"
               >

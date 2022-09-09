@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import VideoCard from "../../components/Main/VideoCard/VideoCard";
 import { getOwnVideos } from "../../services";
-
+import styles from "./OwnVideos.module.css";
 interface Videos {
   title: string;
   slug: string;
@@ -52,8 +52,9 @@ export default function index() {
       </Head>
       {!isLoading ? (
         <div className="text-gray-600 body-font relative bg-transparent pl-24 sm:pl-28 md:pl-40 lg:pl-60 mt-10">
-          <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-wrap -m-3">
+          <div className={styles.videoContainer}>
+            <h1 className={styles.h1}>My Videos</h1>
+            <div className={styles.singleVideoWrapper}>
               {videos &&
                 videos.map((video) => (
                   <VideoCard
@@ -76,8 +77,8 @@ export default function index() {
           </div>
         </div>
       ) : (
-        <div className="w-full mx-auto h-screen flex justify-center items-center pl-24 sm:pl-28 md:pl-40 lg:pl-60 mt-10">
-          <h1 className="text-4xl text-hr font-semibold">Loading...</h1>
+        <div className={styles.loader}>
+          <h1 className={styles.loadingText}>Loading...</h1>
         </div>
       )}
     </Layout>

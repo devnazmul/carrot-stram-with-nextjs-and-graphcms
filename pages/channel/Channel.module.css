@@ -1,0 +1,25 @@
+.container {
+  @apply pl-16 sm:pl-24 md:pl-36 lg:pl-40 xl:pl-44 w-full;
+}
+.loader {
+  @apply absolute top-1/2 right-0 left-72 mx-auto max-w-max;
+}
+.contentContainer {
+  @apply w-full mt-36 md:mt-44 lg:mt-44 lg:pl-3 xl:pl-8;
+}
+.btnContainer {
+  @apply w-auto overflow-x-auto flex justify-between items-center px-5 md:px-6;
+}
+.categoryVideoContainer {
+  @layer body-font
+  @apply text-gray-600 bg-transparent mt-0;
+}
+.category {
+  @apply font-bold text-xl text-white text-left lg:text-3xl lg:ml-5 mt-9 mb-16 lg:my-10;
+}
+.videoCard {
+  @apply flex flex-wrap -m-3;
+}
+.spinner {
+  @apply animate-spin inline-block w-32 h-32 border-[3px] border-current border-t-transparent text-orange rounded-full;
+}

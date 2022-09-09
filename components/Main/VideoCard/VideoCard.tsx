@@ -62,9 +62,9 @@ function VideoCard({
   return (
     <div
       onClick={() => router.push(`/video/${videoSlug}`)}
-      className="videoCard cursor-pointer bg-secondery relative mb-10 rounded-3xl h-full px-2 sm:w-1/2 md:w-1/2 lg:w-1/3 w-full"
+      className="videoCard cursor-pointer relative mb-10 rounded-3xl h-full px-2 sm:w-1/2 md:w-1/2 lg:w-1/3 w-full"
     >
-      <span className="block relative w-full  videoThum overflow-hidden mb-1 rounded">
+      <span className="block relative w-full videoThum overflow-hidden mb-1 rounded">
         {thumbnailUrl && (
           <Image
             loading={"lazy"}
@@ -107,7 +107,7 @@ function VideoCard({
                   )}
                 </div>
 
-                <div className="text-xs tracking-widest flex items-center">
+                <div className="text-xs tracking-widest text-gray-700 flex items-center">
                   {views && views === 0 ? (
                     <span>0 views</span>
                   ) : (

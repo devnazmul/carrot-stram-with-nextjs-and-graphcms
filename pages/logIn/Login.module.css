@@ -1,0 +1,18 @@
+.container {
+  @apply pl-20 sm:pl-28 md:pl-40 lg:pl-56 xl:pl-60 pt-32 w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center;
+}
+.formH1 {
+  @apply text-orange text-4xl mb-10 text-center;
+}
+.input {
+  @apply rounded-lg px-5 py-5 w-full mb-5 bg-hr text-orange;
+}
+.forgotPass {
+  @apply text-sm mb-5 text-orange cursor-pointer;
+}
+.submitBtn {
+  @apply rounded-lg px-5 py-5 w-full mb-5 text-hr font-semibold cursor-pointer bg-orange;
+}
+.highlightText {
+  @apply text-orange cursor-pointer;
+}

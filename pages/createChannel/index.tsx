@@ -9,6 +9,7 @@ import {
   updateChannelStage,
 } from "../../services";
 import { genarateRandomSlug } from "../../services/genarateRandomSlug";
+import styles from "./CreateChannel.module.css";
 
 type Inputs = {
   example: string;
@@ -69,11 +70,11 @@ function index() {
   return (
     <Layout>
       {userEmail !== undefined && (
-        <div className="relative pl-28 sm:pl-36 md:pl-44 lg:pl-56 xl:pl-60 pt-32 h-full w-full flex text-lg text-gray-600 font-bold flex-col  justify-center items-center">
+        <div className={styles.container}>
           {loading && (
-            <div className="absolute flex justify-center items-center bg-black w-1/2 h-full bg-opacity-50 rounded-xl">
+            <div className={styles.loadingContainer}>
               <div
-                className="animate-spin inline-block w-32 h-32 border-[3px] border-current border-t-transparent text-orange rounded-full"
+                className={styles.loadingSpinner}
                 role="status"
                 aria-label="loading"
               >
@@ -83,30 +84,28 @@ function index() {
           )}
           {
             <form
-              className={`w-full flex-col justify-center items-center px-60 ${
+              className={`${styles.form} ${
                 userEmail === undefined ? "hidden" : "flex"
               }`}
               onSubmit={handleSubmit(onSubmit)}
               acceptCharset={"utf-8"}
             >
-              <h1 className="text-hr text-4xl mb-10 text-center">
-                Create Channel
-              </h1>
+              <h1 className={styles.h1}>Create Channel</h1>
               <input
-                className="rounded-lg px-5 py-5 w-full mb-5 bg-hr text-orange"
+                className={styles.channelNameInput}
                 placeholder="Channel name"
                 type="text"
                 {...register("channelName", { required: true, maxLength: 80 })}
               />
               <input
-                className="rounded-lg px-5 py-5 w-full mb-5 bg-hr text-orange hidden"
+                className={styles.emailInput}
                 placeholder="authEmail"
                 type="email"
                 defaultValue={userEmail}
                 {...register("authEmail", { required: true })}
               />
               <input
-                className="rounded-lg px-5 py-5 w-full mb-5 text-hr font-semibold cursor-pointer bg-orange"
+                className={styles.submitBtn}
                 type="submit"
                 value={"Create"}
               />
