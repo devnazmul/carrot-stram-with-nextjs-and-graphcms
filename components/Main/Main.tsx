@@ -42,6 +42,7 @@ export default function Main({ videos }: Props) {
         <div className="flex flex-wrap -m-3">
           {videos.map((video: Video) => (
             <React.Fragment key={video.id}>
+              {console.log(video.slug)}
               <VideoCard
                 videoSlug={video.slug}
                 thumbnailUrl={video.thumbnail.url}
