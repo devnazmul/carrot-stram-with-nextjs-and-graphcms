@@ -5,13 +5,14 @@ module.exports = {
     locales: ["en"],
     defaultLocale: "en",
   },
-  
+
   images: {
     domains: [
-      'source.unsplash.com',
-      'media.graphassets.com',
-      'i.ibb.co'
+      "source.unsplash.com",
+      "media.graphassets.com",
+      "ap-south-1.graphassets.com",
+      "i.ibb.co",
     ],
   },
-  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
-}
+  pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],
+};
