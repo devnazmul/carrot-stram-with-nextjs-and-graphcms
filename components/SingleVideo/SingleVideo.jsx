@@ -5,15 +5,19 @@ import { useEffect, useState } from "react";
 import { BiCommentDetail, BiDislike, BiLike, BiShareAlt } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
 import { HiOutlineClipboard, HiOutlineClipboardCheck } from "react-icons/hi";
-import { IoCloseSharp, IoNotifications, IoNotificationsOutline } from "react-icons/io5";
+import {
+  IoCloseSharp,
+  IoNotifications,
+  IoNotificationsOutline,
+} from "react-icons/io5";
 import { MdOutlineDescription } from "react-icons/md";
 import {
   createSubscription,
   deleteSubscription,
-  getSingleSubscription
+  getSingleSubscription,
 } from "../../services";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
-import styles from './SingleVideo.module.css';
+import styles from "./SingleVideo.module.css";
 
 export default function SingleVideo({ video, link }) {
   const thumbnail = video[0].thumbnail.url;
@@ -59,22 +63,27 @@ export default function SingleVideo({ video, link }) {
   };
 
   function copyText() {
-    var copyText = document.getElementById("link");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(copyText.value);
+    // var copyText = document.getElementById("link");
+    // copyText.select();
+    // copyText.setSelectionRange(0, 99999);
+    // navigator.clipboard.writeText(copyText.value);
     setCopied(true);
   }
 
   return (
     <div className={styles.container}>
-
       {sharePopup && (
         <div className={`${styles.sharePopupContainer} glassMor z-10`}>
           <div className={styles.popupCard}>
-            <button onClick={()=>{setSharePopup(false); setCopied(false)}} className={styles.popupCloseBtn} >
+            <button
+              onClick={() => {
+                setSharePopup(false);
+                setCopied(false);
+              }}
+              className={styles.popupCloseBtn}
+            >
               <IoCloseSharp className="text-white text-2xl" />
-              </button>
+            </button>
             <input
               className={styles.popupInput}
               type="text"
@@ -86,18 +95,24 @@ export default function SingleVideo({ video, link }) {
             {
               <>
                 {!copied ? (
-                  <button title="copy" className="text-white" onClick={copyText}>
+                  <button
+                    title="copy"
+                    className="text-white"
+                    onClick={copyText}
+                  >
                     <HiOutlineClipboard className="text-white text-3xl ml-3" />
                   </button>
                 ) : (
-                  <HiOutlineClipboardCheck title="copid" className={styles.copiedBtn} />
+                  <HiOutlineClipboardCheck
+                    title="copid"
+                    className={styles.copiedBtn}
+                  />
                 )}
               </>
             }
           </div>
         </div>
       )}
-
 
       <div className="w-9/12 flex justify-center self-center mx-auto mb-10">
         <VideoPlayer thumbnail={thumbnail} url={url} />
